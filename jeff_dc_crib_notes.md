@@ -131,3 +131,5 @@
     - what does "four" > "five" return?
     - why?
 8. Missing Data
+    - NA
+    - 

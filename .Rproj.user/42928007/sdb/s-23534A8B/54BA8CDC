@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "# 00 Before we get started\n1. Working Directory\n2. RStudio to manage WD\n    - Open RStudio\n    - Create Project data-carpentry\n    - Create data/ and download data into it\n    - Create data-carpentry-script.R\n    - Show diagram\n3. RStudio walk-through\n    - Panes\n    - Auto-complete\n    - R Code\n        - Code is instructions to computer: 2-ways\n        - Console\n            - prompt (> vs +)\n            - ESC\n        - Script to console (buttons and ctrl-enter)\n4.  Basics of R\n    - Free and Open Source\n    - Better than commercial\n        - First implementations\n        - widely extensible (nrow(available.packages()))\n    - 1000's of developers vs 10's-100's\n    - huge and (mostly) friendly community\n    - functional and OO\n    - not just for stats, general purpose programming too.\n5. R Syntax\n    - http://www.datacarpentry.org/R-ecology-lesson/00-before-we-start.html#the-r-syntax\n    - comments\n    - assignment operator\n    - a function\n    - = for args\n    - $\n    - quotes v not quotes\n6. Using functions\n    - round\n    - args(round)\n    - show multiple args\n        - named (orderd, not ordered)\n        - not-named\n7. The most important skill in coding: HELP!\n    - https://twitter.com/ThePracticalDev/status/716390583217029124\n    - When you know the function\n        - ? or help\n        - args\n        - RStudio auto-complete\n    - When you know the package\n        - help(package=\"dplyr\")\n    - When you know a bit of the topic\n        - ??smirnov\n        - ??histogram\n    - Google and Stackoverflow\n        - Asking good questions (see http://www.datacarpentry.org/R-ecology-lesson/00-before-we-start.html#asking-for-help)\n    - Mailing Lists\n    - Task Views",
+    "created" : 1469208239184.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3830395478",
+    "id" : "54BA8CDC",
+    "lastKnownWriteTime" : 1469211671,
+    "last_content_update" : 1469211671595,
+    "path" : "~/projects/dc_r/jeff_dc_crib_notes.md",
+    "project_path" : "jeff_dc_crib_notes.md",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "markdown"
+}

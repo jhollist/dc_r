@@ -131,5 +131,20 @@
     - what does "four" > "five" return?
     - why?
 8. Missing Data
-    - NA
-    - 
+    - Should have already discussed during spreadsheet, if not say a few words 
+    - R's values is NA
+    - for example: 
+        - planets <- c("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", NA)
+        - heights <- c(2, 4, 4, NA, 6)
+        - mean(heights)
+        - max(heights)
+        - mean(heights, na.rm = TRUE)
+        - max(heights, na.rm = TRUE)
+    - is.na()
+    - na.omit()
+    - complete.cases()
+9. Challenge
+    - Try this: sample <- c(2, 4, 4, "NA", 6); mean(sample, na.rm = TRUE)
+    - What happens and why?
+    - Why does the error message say the argument is not numeric?
+    

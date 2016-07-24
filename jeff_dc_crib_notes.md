@@ -249,4 +249,24 @@ http://www.datacarpentry.org/R-ecology-lesson/03-data-frames.html
     - understand the concept of a data.frame
     - use sequences
     - know how to access any element of a data.frame
-    
+1. What are data frames?
+    - de facto standard for data in R
+    - tabular/rectangular data
+    - has rows and columns, spreadsheet like but with rules
+        - collection of vectors as columns
+    - can see basics structure with `str()`
+    - either built or imported
+        - `data.frame()`
+        - `read.csv()`
+        - `read.table()`
+        - packages rio, readr, readxl ...
+        - defualt on import is to convert strings to factors... ugh!
+    - import:
+        - `some_data <- read.csv("data/some_file.csv", stringsAsFactors = FALSE)`
+    - build:
+        - Compare the output of these examples
+        - vs`character` and `factor`.
+        - `example_data <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),feel=c("furry", "furry", "squishy", "spiny"),
+                           weight=c(45, 8, 1.1, 0.8))
+str(example_data)
+

@@ -177,6 +177,7 @@ https://jwhollister.com/R-ecology-lesson/02-starting-with-data.html
     - understand what factors are and how to manipulate them
 1. Introduce the survey.csv dataset
     - it is data on species captured across many years and plots
+
 |Column|Description|
 |------|-----------|
 |record_id|	Unique id for the observation|
@@ -192,6 +193,7 @@ https://jwhollister.com/R-ecology-lesson/02-starting-with-data.html
 |species|	species of animal|
 |taxa|	e.g. Rodent, Reptile, Bird, Rabbit|
 |plot_type|	type of plot|
+
 2. Download the data, store in data folder, and read in
     - `download.file("https://ndownloader.figshare.com/files/2292169", "data/portal_data_joined.csv")`
     - `surveys <- read.csv('data/portal_data_joined.csv')`

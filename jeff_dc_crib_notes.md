@@ -1,5 +1,7 @@
 ---
-output: html_document
+output: 
+  html_document:
+    css: style.css
 ---
 # 00 Before we get started
 https://jwhollister.com/R-ecology-lesson/00-before-we-start.html

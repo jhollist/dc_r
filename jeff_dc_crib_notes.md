@@ -266,7 +266,23 @@ http://www.datacarpentry.org/R-ecology-lesson/03-data-frames.html
     - build:
         - Compare the output of these examples
         - vs`character` and `factor`.
-        - `example_data <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),feel=c("furry", "furry", "squishy", "spiny"),
-                           weight=c(45, 8, 1.1, 0.8))
-str(example_data)
-
+        - factor: 
+            - `example_data <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),feel=c("furry", "furry", "squishy", "spiny"), weight=c(45, 8, 1.1, 0.8)); str(example_data)`
+        - character:
+            - `example_data <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),feel=c("furry", "furry", "squishy", "spiny"), weight=c(45, 8, 1.1, 0.8),stringsAsFactors = FALSE); str(example_data)`
+2. Challenge
+    - Let's do these one at a time, then discuss.  5 minutes for each.
+    - Find the mistakes and experiment!!
+        - `author_book <- data.frame(author_first=c("Charles", "Ernst", "Theodosius"), author_last=c(Darwin, Mayr, Dobzhansky),year=c(1942, 1970))`
+    - Predict class for each column, we will check together using `str()`
+        - Did you guess right? Why? Why not?
+        - What would stringAsFactors = FALSE have done?
+        - What needs to change to get everything as you'd expect?
+        - `country_climate <- data.frame(country=c("Canada", "Panama", "South Africa", "Australia"),climate=c("cold", "hot", "temperate", "hot/temperate"), temperature=c(10, 30, 18, "15"), northern_hemisphere=c(TRUE, TRUE, FALSE, "FALSE"),has_kangaroo=c(FALSE, FALSE, FALSE, 1))`
+    - We've talked about `data.frame()` and `read.csv()`, but you can also bind existing vectors together as columns with `cbind()` or as rows with `rbind()`.  Try this and the check with `class()`.
+        - `colors <- c("red", "green", "blue", "yellow")`
+        - `counts <- c(50, 60, 65, 82)`
+        - `new_dataframe <- as.data.frame(cbind(colors, weights))`
+        - `class(new_dataframe)`
+    - Gist of this is that type conversions is both a good and bad thing.  Just make sure you check your data when it is read in to be sure it is as you expect.
+3. Inspecting `data.frame` objects

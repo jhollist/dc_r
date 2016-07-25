@@ -2,7 +2,7 @@
 output: pdf_document
 ---
 # 00 Before we get started
-http://www.datacarpentry.org/R-ecology-lesson/00-before-we-start.html
+https://jwhollister.com/R-ecology-lesson/00-before-we-start.html
 
 0. Learning Objectives:
     - Organize files and directories related to a particular set of analyses in an R Project within RStudio
@@ -38,7 +38,7 @@ http://www.datacarpentry.org/R-ecology-lesson/00-before-we-start.html
     - functional and OO
     - not just for stats, general purpose programming too.
 5. R Syntax
-    - http://www.datacarpentry.org/R-ecology-lesson/00-before-we-start.html#the-r-syntax
+    - https://jwhollister.com/R-ecology-lesson/00-before-we-start.html#the-r-syntax
     - comments
     - assignment operator
     - a function
@@ -63,12 +63,12 @@ http://www.datacarpentry.org/R-ecology-lesson/00-before-we-start.html
         - `??smirnov`
         - `??histogram`
     - Google and Stackoverflow
-        - Asking good questions (see http://www.datacarpentry.org/R-ecology-lesson/00-before-we-start.html#asking-for-help)
+        - Asking good questions (see https://jwhollister.com/R-ecology-lesson/00-before-we-start.html#asking-for-help)
     - Mailing Lists
     - Task Views
     
 ## 01 Intro to R
-http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-R.html
+https://jwhollister.com/R-ecology-lesson/01-intro-to-R.html
 
 0. Learning objectives:
     - Familiarize participants with R syntax
@@ -169,7 +169,7 @@ http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-R.html
     - Why does the error message say the argument is not numeric?
     
 ## 02 Starting with data
-http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html
+https://jwhollister.com/R-ecology-lesson/02-starting-with-data.html
 
 0. Learning objectives: 
     - load external data (CSV files) in memory using the survey table (surveys.csv) as an example
@@ -243,7 +243,7 @@ http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html
     - ~10 minutes to work  on this.
     
 ## 03 Data Frames
-http://www.datacarpentry.org/R-ecology-lesson/03-data-frames.html
+https://jwhollister.com/R-ecology-lesson/03-data-frames.html
 
 0. Learning objectives
     - understand the concept of a data.frame
@@ -331,6 +331,8 @@ http://www.datacarpentry.org/R-ecology-lesson/03-data-frames.html
     - Create a data.frame containing only the observations from 1999 of the surveys dataset.
 
 ## 04 Aggregating and analyzing data with dplyr
+https://jwhollister.com/R-ecology-lesson/04-dplyr.html
+
 0. Learning Objective
     - Learn basic utilities of the `dplyr` package
     - Select and filter data

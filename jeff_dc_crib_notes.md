@@ -454,9 +454,11 @@ ggplot(data = surveys_complete)
 ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) 
 #Add the geometry to plot
 ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point
+
 ```
 
-    - Interactive is fine, but usually save to object
+-dadshfalhflajkshf
+
 
 ```
 surveys_plot <- ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point

@@ -1,5 +1,5 @@
 ---
-output: pdf_document
+output: html_document
 ---
 # 00 Before we get started
 https://jwhollister.com/R-ecology-lesson/00-before-we-start.html
@@ -406,6 +406,7 @@ https://jwhollister.com/R-ecology-lesson/04-dplyr.html
     - After a lot of data munging, useful to store to external file for sharing, archiving, etc.
     - Do with `write.csv()`
     - Let's prep our dataset for next lesson on plotting and write out to a new .csv
+
 ```
 surveys_complete <- surveys %>%
   filter(species_id != "",  # remove missing species_id
@@ -422,11 +423,10 @@ species_counts <- surveys_complete %>%
 #Now filter on these: 
 surveys_complete <- surveys_complete %>%
                       filter(species_id %in% species_counts$species_id)
+dim(surveys_complete) #Should be 30463 by 13
+#Finally
+write.csv(surveys_complete, file="data_output/surveys_complete.csv", row.names=FALSE)
 ```
-
-
-    - `dim(surveys_complete)` #Should be 30463 by 13
-    - Finally: `write.csv(surveys_complete, file="data_output/surveys_complete.csv", row.names=FALSE)`
     
 ## 05 Data Visualization with ggplot2
 http://jwhollister.com/R-ecology-lesson/05-visualization-ggplot2.html
@@ -448,30 +448,24 @@ http://jwhollister.com/R-ecology-lesson/05-visualization-ggplot2.html
         - bind together with `+`
         - call object to plot
     - interactive example:
-
-```
-#minimum required
-ggplot(data = surveys_complete) 
-#now has x and y mapped via aes()
-ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) 
-#Add the geometry to plot
-ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point
-
-```
-
-
-      - Interactive is fine
-
-
-
-```
-surveys_plot <- ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point
-surveys_plot
-```
-
-
+        - `#minimum required`
+        - `ggplot(data = surveys_complete)` 
+        - `#now has x and y mapped via aes()`
+        - `ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length))` 
+        - `#Add the geometry to plot`
+        - `ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point()`
+    - Interactive is fine, but saving to object is a bit better
+        - `surveys_plot <- ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point(); surveys_plot`
     - think of stuff in `ggplot()` as universal (available to all geoms) and stuff added to geom as only for that geom.
-    
-    
+3. Build plots iteratively
+    - no overplot: `surveys_plot <- ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point(alpha = 0.1); surveys_plot`
+    - add color: `surveys_plot <- ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point(alpha = 0.1, color = "blue"); surveys_plot`
+    - add color per species: `surveys_plot <- ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point(alpha = 0.1, color = species_id); surveys_plot`
+4. Boxplot
+5. Challenge
+6. Time Series
+7. Faceting
+8. Challenge
+9. Customization
 
 

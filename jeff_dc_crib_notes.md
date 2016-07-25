@@ -47,11 +47,19 @@ https://jwhollister.com/R-ecology-lesson/00-before-we-start.html
     - `$`
     - quotes v not quotes
 6. Using functions
-    - round
-    - args(round)
+    - `round`
+    - `args(round)`
     - show multiple args
         - named (orderd, not ordered)
         - not-named
+    - with base R: ~2400
+    - Extend R with Packages:
+        - `install.packages()`
+        - CRAN
+        - `library()`
+        - `install.packages("dplyr")`
+        - `library("dplyr")`
+        - `dplyr::mutate()`
 7. The most important skill in coding: HELP!
     - https://twitter.com/ThePracticalDev/status/716390583217029124
     - When you know the function
@@ -352,3 +360,106 @@ https://jwhollister.com/R-ecology-lesson/04-dplyr.html
         - `filter(surveys, year == 1995)` 
         - note: `==` if not already covered
 3. Pipes
+    - What if we want to both select and filter?
+        - intermediate, nested, or pipes
+        - Let little bunny foo-foo explain:
+            - http://r4ds.had.co.nz/pipes.html
+        - from `magrittr`, a `dplyr` dependency
+    - `output %>% input #first arg by default`
+    - Examples: 
+        - `surveys %>% filter(weight < 5) %>% select(species_id, sex, weight)`
+        - `surveys_sml <- surveys %>% filter(weight < 5) %>% select(species_id, sex, weight);surveys_sml`
+4. Challenge
+    - Using pipes, subset the data to include individuals collected before 1995, and retain the columns year, sex, and weight.
+    - Stickies when done
+    - I'll show mine (or ask if anyone wants to show)
+5. Mutate
+    - Create new columns
+    - examples (show line breaks in source):
+        - `surveys %>% mutate(weight_kg = weight / 1000)`
+        - `surveys %>% mutate(weight_kg = weight / 1000) %>% head`
+        - `surveys %>% filter(!is.na(weight)) %>% mutate(weight_kg = weight / 1000) %>% head`
+            - describe `!is.na()`
+6. Challenge
+    - Create a new dataframe from the survey data that meets the following criteria: contains only the species_id column and a column that contains values that are half the hindfoot_length values (e.g. a new column hindfoot_half). In this hindfoot_half column, there are no NA values and all values are < 30.
+7. Split-apply-combine and `summarize()`
+    - Split into groups
+    - Apply analyis to each
+    - Combine results
+    - See https://www.jstatsoft.org/article/view/v040i01
+    - `group_by()` and `summarize()`
+    - Examples:
+        - `surveys %>% group_by(sex) %>% summarize(mean_weight = mean(weight, na.rm = TRUE))`
+        - two columns: `surveys %>% group_by(sex, species_id) %>% summarize(mean_weight = mean(weight, na.rm = TRUE))`
+        - remove missing values up front: `surveys %>% filter(!is.na(weight)) %>% group_by(sex, species_id) %>% summarize(mean_weight = mean(weight))`
+        - explain `tbl_df`
+        - `surveys %>% filter(!is.na(weight)) %>% group_by(sex, species_id) %>% summarize(mean_weight = mean(weight)) %>% print(n=15)`
+        - Summarize multiple values: `surveys %>%filter(!is.na(weight)) %>% group_by(sex, species_id) %>% summarize(mean_weight = mean(weight), min_weight = min(weight))`
+    - Tally
+        - as part of summarize with: `surveys %>% group_by(sex) %>% summarize(mean_weight = mean(weight, na.rm = TRUE),samp = n())`
+        - with `tally()`: `surveys %>% group_by(sex) %>% tally()`
+8. Challenge
+    - How many individuals were caught in each plot_type surveyed?
+    - Use group_by() and summarize() to find the mean, min, and max hindfoot length for each species (using species _id).
+    - What was the heaviest animal measured in each year? Return the columns year, genus, species_id, and weight.
+9. Exporting data
+    - After a lot of data munging, useful to store to external file for sharing, archiving, etc.
+    - Do with `write.csv()`
+    - Let's prep our dataset for next lesson on plotting and write out to a new .csv
+```
+surveys_complete <- surveys %>%
+  filter(species_id != "",  # remove missing species_id
+  !is.na(weight),           # remove missing weight
+  !is.na(hindfoot_length),  # remove missing hindfoot_length
+  sex != "")                # remove missing sex
+
+#Most common: 
+species_counts <- surveys_complete %>%
+                    group_by(species_id) %>%
+                    tally %>%
+                    filter(n >= 50) %>%
+                    select(species_id)
+#Now filter on these: 
+surveys_complete <- surveys_complete %>%
+                      filter(species_id %in% species_counts$species_id)
+```
+    - `dim(surveys_complete)` #Should be 30463 by 13
+    - Finally: `write.csv(surveys_complete, file="data_output/surveys_complete.csv", row.names=FALSE)`
+    
+## 05 Data Visualization with ggplot2
+http://jwhollister.com/R-ecology-lesson/05-visualization-ggplot2.html
+
+0. Learning objectives
+    - Visualize mammals data from surveys_complete.csv
+    - Understand how to plot data using `ggplot2`
+    - Build step-by-step, complex plots
+1. Get and Load packages
+    - `install.packages("ggplot2")`
+    - `library(ggplot2)`
+    - `library(dplyr)`
+2. What is `ggplot2`
+    - plotting package for all things static viz
+    - data.frame is basis for plots
+    - basic recipe:
+        - create ggplot object
+        - add geom
+        - bind together with `+`
+        - call object to plot
+    - interactive example:
+
+```
+#minimum required
+ggplot(data = surveys_complete) 
+#now has x and y mapped via aes()
+ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) 
+#Add the geometry to plot
+ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) +
+geom_point
+```
+    - Interactive is fine, but usually save to object
+
+```
+ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) +
+geom_point
+```
+

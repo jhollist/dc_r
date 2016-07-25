@@ -462,10 +462,57 @@ http://jwhollister.com/R-ecology-lesson/05-visualization-ggplot2.html
     - add color: `surveys_plot <- ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point(alpha = 0.1, color = "blue"); surveys_plot`
     - add color per species: `surveys_plot <- ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point(alpha = 0.1, color = species_id); surveys_plot`
 4. Boxplot
+    - Boxplot is looking for a categorical (think factor) on the x and continuous on the y.
+    - `ggplot(data = surveys_complete, aes(x = species_id, y = hindfoot_length)) + geom_boxplot()`
+    - add jitter to better see distribution of the points
+    - `ggplot(data = surveys_complete, aes(x = species_id, y = hindfoot_length)) + geom_boxplot() + geom_jitter(alpha = 0.1, color = "tomato")`
 5. Challenge
+    - How could we get the boxplot plotted on top of the jittered points?
+    - Boxplots are useful summaries, but hide the shape of the distribution. For example, if there is a bimodal distribution, this would not be observed with a boxplot. An alternative to the boxplot is the violin plot (sometimes known as a beanplot), where the shape (of the density of points) is drawn.
+        - Replace the box plot with a violin plot; see geom_violin()
+    - In many types of data, it is important to consider the scale of the observations. For example, it may be worth changing the scale of the axis to better distribute the observations in the space of the plot. Changing the scale of the axes is done similarly to adding/modifying other components (i.e., by incrementally adding commands).
+      - Represent weight on the log10 scale; see scale_y_log10()
+      - Create boxplot for hindfoot_length.
 6. Time Series
+    - Plot year vs total count
+    - First we need to massage data:
+        - `yearly_counts <- surveys_complete %>% group_by(year, species_id) %>% tally`
+    - Then Plot
+        - `time_series <- ggplot(data = yearly_counts, aes(x = year, y = n)) + geom_line()`
+    - Not quite...  That is all species together
+    - By species:
+        - `time_series <-ggplot(data = yearly_counts, aes(x = year, y = n, group = species_id)) + geom_line()`
+    - Need to tell species apart:
+        - `time_series <-ggplot(data = yearly_counts, aes(x = year, y = n, group = species_id, color = species_id)) + geom_line()`
 7. Faceting
+    - Last time series plot OK, but still hard to read.  Facets allow for separate plots per group
+    - `ggplot(data = yearly_counts, aes(x = year, y = n, group = species_id, colour = species_id)) + geom_line() + facet_wrap(~ species_id)`
+    - Split by sex, needs more data manipulation (skip if no time)
+    - `yearly_sex_counts <- surveys_complete %>%group_by(year, species_id, sex) %>%tally`
+    - `time_series_sp_sex <- ggplot(data = yearly_sex_counts, aes(x = year, y = n, color = species_id, group = sex)) + geom_line() + facet_wrap(~ species_id)`
+    - Lastly, lets clean up extraneous legend, and change up our background
+    - `time_series_sp_sex <- ggplot(data = yearly_sex_counts, aes(x = year, y = n, color = sex, group = sex)) + geom_line() + facet_wrap(~ species_id) + theme_bw()`
 8. Challenge
+    - `Use what you just learned to create a plot that depicts how the average weight of each species changes through the years.`
+9. Facet Grid (skip if no time)
+    - Similar to facet_wrap, but let you specify row and columns for layout instead of fitting on a sinlge page
+    - Data manipulation: `yearly_sex_weight <- surveys_complete %>% group_by(year, sex, species_id) %>% summarize(avg_weight = mean(weight))`
+    - Plot 1 col x 2 rows: `ggplot(data = yearly_sex_weight, aes(x=year, y=avg_weight, color = species_id, group = species_id)) + geom_line() + facet_grid(sex ~ .)`
+    - Plot 2 col x 1 row: `ggplot(data = yearly_sex_weight, aes(x=year, y=avg_weight, color = species_id, group = species_id)) + geom_line() + facet_grid(. ~ sex)`
 9. Customization
-
+    - Infinite ways to customize plots
+    - Cheat sheet is helpful: https://www.rstudio.com/wp-content/uploads/2015/08/ggplot2-cheatsheet.pdf
+    - Labels with `labs()`
+        - `time_series_sp_sex <- time_series_sp_sex + labs(title = 'Observed species in time', x = 'Year of observation',y = 'Number of species')`
+    - Up the font:
+        - `time_series_sp_sex <- time_series_sp_sex + theme(text=element_text(size=16, family="Arial"))`
+    - change x-axis direction:
+        - `time_series_sp_sex <- time_series_sp_sex + theme(axis.text.x = element_text(colour="grey20", size=12, angle=90, hjust=.5, vjust=.5), axis.text.y = element_text(colour="grey20", size=12),text=element_text(size=16, family="Arial"))`
+    - save and use a new theme:
+        - `arial_grey_theme <- theme(axis.text.x = element_text(colour="grey20", size=12, angle=90, hjust=.5, vjust=.5),axis.text.y = element_text(colour="grey20", size=12), text=element_text(size=16, family="Arial"))`
+        - `ggplot(surveys_complete, aes(x = species_id, y = hindfoot_length)) + geom_boxplot() + arial_grey_theme`
+10. Challenge
+    - Try to customize a plot on your own.  Use the RStudio CheatSheet for help.
+11. Save the plot
+    - `ggsave()`
 

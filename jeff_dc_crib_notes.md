@@ -37,6 +37,7 @@ https://jwhollister.com/R-ecology-lesson/00-before-we-start.html
     - huge and (mostly) friendly community
     - functional and OO
     - not just for stats, general purpose programming too.
+    - http://jwhollister.com/R-ecology-lesson/motivation.html
 5. R Syntax
     - https://jwhollister.com/R-ecology-lesson/00-before-we-start.html#the-r-syntax
     - comments
@@ -342,3 +343,12 @@ https://jwhollister.com/R-ecology-lesson/04-dplyr.html
     - Create new columns with `mutate()`
     - Use the split-apply-combine paradigm to summarize data 
     - Export data with `write.csv()`
+    
+1. What is `dplyr`? 
+2. Selecting and Filtering
+    - Selecting columns
+        - `select(surveys, plot_id, species_id, weight)`
+    - Filtering rows
+        - `filter(surveys, year == 1995)` 
+        - note: `==` if not already covered
+3. Pipes

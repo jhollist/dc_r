@@ -423,6 +423,8 @@ species_counts <- surveys_complete %>%
 surveys_complete <- surveys_complete %>%
                       filter(species_id %in% species_counts$species_id)
 ```
+
+
     - `dim(surveys_complete)` #Should be 30463 by 13
     - Finally: `write.csv(surveys_complete, file="data_output/surveys_complete.csv", row.names=FALSE)`
     
@@ -457,13 +459,16 @@ ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_poi
 
 ```
 
--dadshfalhflajkshf
+
+      - Interactive is fine
+
 
 
 ```
 surveys_plot <- ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point
 surveys_plot
 ```
+
 
     - think of stuff in `ggplot()` as universal (available to all geoms) and stuff added to geom as only for that geom.
     

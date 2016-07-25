@@ -453,13 +453,17 @@ ggplot(data = surveys_complete)
 #now has x and y mapped via aes()
 ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) 
 #Add the geometry to plot
-ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) +
-geom_point
+ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point
 ```
     - Interactive is fine, but usually save to object
 
 ```
-ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) +
-geom_point
+surveys_plot <- ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point
+surveys_plot
 ```
+
+    - think of stuff in `ggplot()` as universal (available to all geoms) and stuff added to geom as only for that geom.
+    
+    
+
 

@@ -286,3 +286,55 @@ http://www.datacarpentry.org/R-ecology-lesson/03-data-frames.html
         - `class(new_dataframe)`
     - Gist of this is that type conversions is both a good and bad thing.  Just make sure you check your data when it is read in to be sure it is as you expect.
 3. Inspecting `data.frame` objects
+    - in addition to `head()` and `str()` we can check
+    - Size
+        - `dim()`
+        - `nrow()`
+        - `ncol()`
+    - Content
+        - `head()`
+        - `tail()`
+    - Names
+        - `names()`
+        - `rownames()`
+    - Summary
+        - `str()`
+        - `summary()`
+4. Indexing, Sequences, and Subsetting
+    - Sequences
+        - `:`, `2:8`
+        - `seq(1, 10, by=2)`
+        - `seq(5, 10, length.out=3)`
+        - `seq(50, by=5, length.out=10)`
+        - `seq(1, 8, by=3) # sequence stops to stay below upper limit`
+    - Indexing
+        - vector
+            - `a_vector <- 20:10; a_vector[3]`
+        - data.frame
+            - `surveys[1]`
+            - `surveys[,1]`
+            - `surveys[1,1]`
+            - `surveys[1,6]`
+            - `surveys[1:3,7]`
+            - `surveys[3,]`
+            - `head_surveys <- surveys[1:6,]`
+        - by column name
+            - `surveys[,"species_id"]`
+            - `surveys[["species_id"]]`
+            - `surveys$species_id`
+            - `surveys$d` #word on partial matching, don't do it`
+    - Subsetting
+        - dm <- surveys[surveys$species_id == "DM", ]
+        
+5. Challenge
+    - The function nrow() on a data.frame returns the number of rows. Use it, in conjuction with seq() to create a new data.frame called surveys_by_10 that includes every 10th row of the survey data frame starting at row 10 (10, 20, 30, …)
+    - Create a data.frame containing only the observations from 1999 of the surveys dataset.
+
+## 04 Aggregating and analyzing data with dplyr
+0. Learning Objective
+    - Learn basic utilities of the `dplyr` package
+    - Select and filter data
+    - Be able to use `magrittr` pipes
+    - Create new columns with `mutate()`
+    - Use the split-apply-combine paradigm to summarize data 
+    - Export data with `write.csv()`

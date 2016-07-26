@@ -61,11 +61,33 @@ http://jwhollister.com/spreadsheet-ecology-lesson/02-common-mistakes.html
 # 03 Dates as data
 http://jwhollister.com/spreadsheet-ecology-lesson/03-dates-as-data.html
 
-# 04 Quality control
+1. Goal is to recognize the problem with dates in spreadsheets
+2. In short, dates may look nice in a spreadsheet, but unles you know exactly what is happening behind the scense, the data can very easily get corrupted.
+3. Challenge
+4. Preferred Date Format
+5. "Helpful" Date formats in spreadsheets
+6. Dates as integers
+7. How to avoid ambiguity
+    - Month, Day, Year columns
+    - Year, Day of Year columns
+
+# 04 Quality Assurance/Quality control
 http://jwhollister.com/spreadsheet-ecology-lesson/04-quality-control.html
 
+1. Quality Assurance is for making sure data is entered according to a set of accepted values (e.g. pH between 0 and 14)
+2. Quality Controol is checking existing data for problems (e.g that pH value of 72 is probably not that!)
+3. Quality Assurance with Data Validation
+4. Quality Control
+    - Sorting
+    - Conditional Formating
+    
 # 05 Exporting Data
 http://jwhollister.com/spreadsheet-ecology-lesson/05-exporting-data.html
 
+1. Want to export data into non-proprietary formats.  
+2. Allows for use in other software and not tied to a piece of software that might not exist in the future, and not always acceptable for data deposition.
+3. Export to .csv (not perfect, but pretty good)
 #06 Data Format Caveats
 http://jwhollister.com/spreadsheet-ecology-lesson/06-data-formats-caveats.html
+
+1. commas in values for .csv (need "")

@@ -170,5 +170,33 @@ Queries are how we interact with data.  They return a view of the database but d
     - Let’s try to combine what we’ve learned so far in a single query. Using the surveys table write a query to display the three date fields, species_id, and weight in kilograms (rounded to two decimal places), for individuals captured in 1999, ordered alphabetically by the species_id. Write the query as a single line, then put each clause on its own line, and see how more legible the query becomes!
     
 # 02 Aggregation
+Aggregation allows us to combine results
+
+1. COUNT and GROUP BY
+    - We can use COUNT, with the start returns all rows
+    - SELECT COUNT(*) FROM surveys;
+    - SELECT COUNT(*), SUM(weight) FROM surveys;
+    - SELECT ROUND(SUM(weight)/1000.0, 3) FROM surveys;
+    - Mention MAX, MIN, AVG
+    
+## Challenge
+    - stickies down
+    - Write a query that returns: total weight, average weight, and the min and max weights for all animals caught over the duration of the survey. Can you modify it so that it outputs these values only for weights between 5 and 10?
+    
+    - Now lets do this same thing, but by species_id
+    - SELECT COUNT(*) FROM surveys GROUP BY species_id;
+    - GROUP BY can be used with multiple comma separate fields
+
+## Challenge
+    - stickies down
+    - Write queries that return:
+        - How many individuals were counted in each year. a) in total; b) per each species.
+        - Average weight of each species in each year. 
+        - Can you modify the above queries combining them into one?
+        
+2. HAVING keyword
+3. Ordering aggregated results
+4. Saving queries
+
 # 03 Joins and Aliases
 

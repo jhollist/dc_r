@@ -162,8 +162,9 @@ Queries are how we interact with data.  They return a view of the database but d
     - query that returns year, species_id, and weight(kg) from surveys with largest weights on top.
     
 5. Order of execution
-    - The database will determine what is the most effecient way to run your query and this has some benefits
-    - We can filter or order on things that aren't necessarily selected
+    - SQL has a fairly specific order of operations and it isn't determined by the order in which we type the query. 
+    - But we can filter or order on things that aren't necessarily selected, but this isn't always determined by order of operations
+    - in short, if it fails, look at the order as that may be the cause!
     - SELECT genus, species FROM species WHERE taxa = 'Bird' ORDER BY species_id ASC;
     
 ## Challenge
@@ -195,8 +196,32 @@ Aggregation allows us to combine results
         - Can you modify the above queries combining them into one?
         
 2. HAVING keyword
+    - HAVING is like where but for aggregate results
+    - SELECT species_id, COUNT(species_id) FROM surveys GROUP BY species_id HAVING COUNT(species_id) > 10;
+    - AS lets you add a column to view and use that later in the query
+    - SELECT species_id, COUNT(species_id) AS occurrences FROM surveys GROUP BY species_id HAVING occurrences > 10;
+    - Notice order of operations.  In this case HAVING must come after the group_by
+    
+## Challenge
+    - Write a query that returns, from the species table, the number of genus in each taxa, only for the taxa with more than 10 genus.
+    
 3. Ordering aggregated results
+    - We can also order aggregated results similar to how we use HAVING
+    - ORDER BY COUNT(species_id);
+    
 4. Saving queries
+    - Often we want to re-use a query, we can do this by saving it as a view:
+    - CREATE VIEW species_count AS SELECT species_id, COUNT(*) FROM surveys GROUP BY species_id;
+    - to re-use: SELECT * FROM species_count;
+    - to drop: DROP VIEW species_count;
+
+## Challenge
+    - Write a query that returns the number of each species caught in each year sorted from most often caught species to the least occurring ones within each year starting from the most recent records. Save this query as a VIEW.
 
 # 03 Joins and Aliases
+
+1. Joins
+2. Functions
+3. Aliases
+
 

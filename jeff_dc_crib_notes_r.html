@@ -119,342 +119,801 @@ $(document).ready(function () {
 </div>
 
 
-<div id="introduction-to-sql" class="section level1">
-<h1>00 Introduction to SQL</h1>
-<ol style="list-style-type: decimal">
-<li>Motivation
+<div id="before-we-get-started" class="section level1">
+<h1>00 Before we get started</h1>
+<p><a href="https://jwhollister.com/R-ecology-lesson/00-before-we-start.html" class="uri">https://jwhollister.com/R-ecology-lesson/00-before-we-start.html</a></p>
+<ol start="0" style="list-style-type: decimal">
+<li>Learning Objectives:
 <ul>
-<li>Seen how to clean up messy data</li>
-<li>Databases offer a way store your now clean data that is robust and safe</li>
-<li>Databases play well with lots of software (including R)</li>
+<li>Organize files and directories related to a particular set of analyses in an R Project within RStudio</li>
+<li>Define the following (as they apply to R): Script, function, working directory, assign, object, variable</li>
+<li>Describe the purpose of the RStudio script, console, environment, and plot windows</li>
+<li>Assign values to variables -Call functions with zero or more named or unnamed arguments</li>
+<li>Use the built-in RStudio help interface to search for more information on R functions -Ask for help from the R user community, providing sufficient information for the problem to be reproduced and troubleshooted</li>
 </ul></li>
-<li>Dataset
+<li>Working Directory</li>
+<li>RStudio to manage WD
 <ul>
-<li>Seen it a bit already, but we will continue using data from the Portal<br />
- Project.</li>
-<li>This is data collected over ~40 years on small mammal communities in southern Arizona.<br />
-</li>
-<li>Has been used in many pubs.</li>
+<li>Open RStudio</li>
+<li>Create Project data-carpentry</li>
+<li>Create data/ and download data into it</li>
+<li>Create data-carpentry-script.R</li>
+<li>Show diagram</li>
 </ul></li>
-<li>Get the data, specifically download from figshare:
+<li>RStudio walk-through
 <ul>
-<li>surveys.csv</li>
-<li>species.csv</li>
-<li>plots.csv</li>
-<li>portal_mammals.sqlite</li>
+<li>Panes</li>
+<li>Auto-complete</li>
+<li>R Code
+<ul>
+<li>Code is instructions to computer: 2-ways</li>
+<li>Console
+<ul>
+<li>prompt (&gt; vs +)</li>
+<li>ESC</li>
 </ul></li>
-<li>Let’s look:
-<ul>
-<li>Say I wanted to look at changes in Dipodomys over time in the 2000s, or I wanted get average weight of species per year.
-<ul>
-<li>What data do we have on Dipodoyms?</li>
-<li>Which files is this data in?</li>
-<li>What sort of operations are needed to do this?</li>
-</ul></li>
-<li>Look at each file quickly</li>
-<li>Select subsets</li>
-<li>Group data</li>
-<li>Calculations</li>
-<li>Combine across spreadsheets</li>
-</ul></li>
-<li>Databases
-<ul>
-<li>Why use?
-<ul>
-<li>separate from analysis</li>
-<li>no risk of changing data</li>
-<li>fast</li>
-<li>better QA on data entry</li>
-<li>concepts translate really well to languages (r/python)</li>
-</ul></li>
-<li>Many different types of Relational Database Managment Systems (RDMS)
-<ul>
-<li>Access</li>
-<li>Oracle</li>
-<li>SQL Server</li>
-<li>Postgres</li>
-<li>MySQL</li>
-<li>Filemaker Pro</li>
-<li>SQLite</li>
-<li>Many commonalities across systems</li>
-</ul></li>
-<li>We will use SQLite
-<ul>
-<li>FOSS</li>
-<li>Widely used</li>
-<li>No admin overhead</li>
-<li>Has limits, but usually not a concern for research data</li>
+<li>Script to console (buttons and ctrl-enter)</li>
 </ul></li>
 </ul></li>
-<li>Relational Databases
+<li>Basics of R
 <ul>
-<li>Let’s look at portal_mammals.sqlite
+<li>Free and Open Source</li>
+<li>Better than commercial
 <ul>
-<li>should have already downloaded from figshare</li>
-<li>Fire up SQLite Manger in Firefox</li>
-<li>Open File with connect database</li>
+<li>First implementations</li>
+<li>widely extensible (nrow(available.packages()))</li>
 </ul></li>
-<li>Tables on left hand side
-<ul>
-<li>can see columns</li>
-<li>see table in browse and search</li>
-<li>database is just a collection of tables</li>
-<li>relational becuase the tables (should) relate to one another</li>
+<li>1000’s of developers vs 10’s-100’s</li>
+<li>huge and (mostly) friendly community</li>
+<li>functional and OO</li>
+<li>not just for stats, general purpose programming too.</li>
+<li><a href="http://jwhollister.com/R-ecology-lesson/motivation.html" class="uri">http://jwhollister.com/R-ecology-lesson/motivation.html</a></li>
 </ul></li>
-<li>Structure Tab
+<li>R Syntax
 <ul>
-<li>info about the table and data types of columns</li>
+<li><a href="https://jwhollister.com/R-ecology-lesson/00-before-we-start.html#the-r-syntax" class="uri">https://jwhollister.com/R-ecology-lesson/00-before-we-start.html#the-r-syntax</a></li>
+<li>comments</li>
+<li>assignment operator</li>
+<li>a function</li>
+<li><code>=</code> for args</li>
+<li><code>$</code></li>
+<li>quotes v not quotes</li>
 </ul></li>
-<li>Execute SQL tab
+<li>Using functions
 <ul>
-<li>Where we will be inputing the SQL</li>
+<li><code>round</code></li>
+<li><code>args(round)</code></li>
+<li>show multiple args
+<ul>
+<li>named (orderd, not ordered)</li>
+<li>not-named</li>
+</ul></li>
+<li>with base R: ~2400</li>
+<li>Extend R with Packages:
+<ul>
+<li><code>install.packages()</code></li>
+<li>CRAN</li>
+<li><code>library()</code></li>
+<li><code>install.packages(&quot;dplyr&quot;)</code></li>
+<li><code>library(&quot;dplyr&quot;)</code></li>
+<li><code>dplyr::mutate()</code></li>
+</ul></li>
+</ul></li>
+<li>The most important skill in coding: HELP!
+<ul>
+<li><a href="https://twitter.com/ThePracticalDev/status/716390583217029124" class="uri">https://twitter.com/ThePracticalDev/status/716390583217029124</a></li>
+<li>When you know the function
+<ul>
+<li><code>?</code> or <code>help</code></li>
+<li>args</li>
+<li>RStudio auto-complete</li>
+</ul></li>
+<li>When you know the package
+<ul>
+<li><code>help(package=&quot;dplyr&quot;)</code></li>
+</ul></li>
+<li>When you know a bit of the topic
+<ul>
+<li><code>??smirnov</code></li>
+<li><code>??histogram</code></li>
+</ul></li>
+<li>Google and Stackoverflow
+<ul>
+<li>Asking good questions (see <a href="https://jwhollister.com/R-ecology-lesson/00-before-we-start.html#asking-for-help" class="uri">https://jwhollister.com/R-ecology-lesson/00-before-we-start.html#asking-for-help</a>)</li>
+</ul></li>
+<li>Mailing Lists</li>
+<li>Task Views</li>
+</ul></li>
+</ol>
+<div id="intro-to-r" class="section level2">
+<h2>01 Intro to R</h2>
+<p><a href="https://jwhollister.com/R-ecology-lesson/01-intro-to-R.html" class="uri">https://jwhollister.com/R-ecology-lesson/01-intro-to-R.html</a></p>
+<ol start="0" style="list-style-type: decimal">
+<li>Learning objectives:
+<ul>
+<li>Familiarize participants with R syntax</li>
+<li>Understand the concepts of objects and assignment</li>
+<li>Understand the concepts of vector and data types</li>
+<li>Get exposed to a few functions</li>
+</ul></li>
+<li>Creating Objects
+<ul>
+<li>Basic operators <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code></li>
+<li>can save result to an object with <code>&lt;-</code></li>
+<li><code>weight_kg &lt;- 55</code></li>
+<li><code>(weight_kg &lt;- 55)</code></li>
+<li><code>weight_kg &lt;- 55; weight_kg</code></li>
+<li>overwrite value</li>
+<li>use math to change (*2.2 for lbs)</li>
+<li><code>weight_lbs &lt;- 2.2 * weight_kg</code></li>
+</ul></li>
+<li>Challenge
+<ul>
+<li>work with person next to you</li>
+<li>discuss what you think values would be</li>
+<li>confirm using R</li>
+<li>About 5 minutes</li>
+</ul></li>
+<li>Vectors and data types
+<ul>
+<li>Vector
+<ul>
+<li>most basic structure</li>
+<li>have length</li>
+<li>have type (must be the same)</li>
+</ul></li>
+<li><code>weight_g &lt;- c(50, 60, 65, 82)</code></li>
+<li><code>weight_g</code></li>
+<li><code>animals &lt;- c(&quot;mouse&quot;, &quot;rat&quot;, &quot;dog&quot;)</code></li>
+<li><code>animals</code></li>
+<li><code>length(), class(), str()</code></li>
+<li>add to the vector (beginning and end)
+<ul>
+<li><code>c(animals,&quot;&quot;)</code></li>
+</ul></li>
+<li>types
+<ul>
+<li>numeric</li>
+<li>character</li>
+<li>logical/boolean</li>
+<li>integer</li>
+<li>raw</li>
+<li>complex</li>
+</ul></li>
+<li>Other data structures
+<ul>
+<li>list</li>
+<li>matrix</li>
+<li>factor</li>
+<li>data.frame</li>
+</ul></li>
+</ul></li>
+<li>Challenge
+<ul>
+<li>Work on together</li>
+<li>We’ve seen that atomic vectors can be of type character, numeric, integer, and logical. But what happens if we try to mix these types in a single vector?
+<ul>
+<li>coercion</li>
+</ul></li>
+<li>What class will these be?</li>
+<li><code>num_char &lt;- c(1, 2, 3, 'a')</code></li>
+<li><code>num_logical &lt;- c(1, 2, 3, TRUE)</code></li>
+<li><code>char_logical &lt;- c('a', 'b', 'c', TRUE)</code></li>
+<li><code>tricky &lt;- c(1, 2, 3, '4')</code></li>
+<li><code>c(3,&quot;z&quot;,TRUE)</code></li>
+<li>so:</li>
+<li>Logical &gt; Numeric</li>
+<li>Logical &gt; Character</li>
+<li>Character &gt; Numeric</li>
+<li>Character &gt; Numeric + Logical</li>
+</ul></li>
+<li>Subsetting
+<ul>
+<li><code>animals &lt;- c(&quot;mouse&quot;, &quot;rat&quot;, &quot;dog&quot;, &quot;cat&quot;)</code></li>
+<li><code>animals[2]</code></li>
+<li><code>animals[c(3,2)]</code></li>
+<li><code>animals[c(1, 2, 3, 2, 1, 4)]</code></li>
+<li><code>animals[-3]</code></li>
+</ul></li>
+<li>Conditional subsetting
+<ul>
+<li><code>weight_g &lt;- c(21, 34, 39, 54, 55)</code></li>
+<li>Subset based on logical
+<ul>
+<li><code>weight_g[c(TRUE, FALSE, TRUE, TRUE, FALSE)]</code></li>
+</ul></li>
+<li>so we can use conditional statements such as
+<ul>
+<li><code>weight_g &gt; 50</code></li>
+<li><code>weight_g[weight_g &gt; 50]</code></li>
+<li>or: <code>weight_g[weight_g &lt; 30 | weight_g &gt; 50]</code></li>
+<li>and: <code>weight_g[weight_g &gt;= 30 &amp; weight_g == 21]</code></li>
+</ul></li>
+<li>Works with both numeric and character
+<ul>
+<li><code>animals[animals == &quot;cat&quot; | animals == &quot;rat&quot;]</code></li>
+<li>%in%: <code>animals %in% c(&quot;rat&quot;, &quot;cat&quot;, &quot;dog&quot;, &quot;duck&quot;)</code></li>
+<li><code>animals[animals %in% c(&quot;rat&quot;, &quot;cat&quot;, &quot;dog&quot;, &quot;duck&quot;)]</code></li>
+</ul></li>
+</ul></li>
+<li>Challenge:
+<ul>
+<li>what does <code>&quot;four&quot; &gt; &quot;five&quot;</code> return?</li>
+<li>why?</li>
+</ul></li>
+<li>Missing Data
+<ul>
+<li>Should have already discussed during spreadsheet, if not say a few words</li>
+<li>R’s values is <code>NA</code></li>
+<li>for example:
+<ul>
+<li><code>planets &lt;- c(&quot;Mercury&quot;, &quot;Venus&quot;, &quot;Earth&quot;, &quot;Mars&quot;, &quot;Jupiter&quot;, &quot;Saturn&quot;, &quot;Uranus&quot;, &quot;Neptune&quot;, NA)</code></li>
+<li><code>heights &lt;- c(2, 4, 4, NA, 6)</code></li>
+<li><code>mean(heights)</code></li>
+<li><code>max(heights)</code></li>
+<li><code>mean(heights, na.rm = TRUE)</code></li>
+<li><code>max(heights, na.rm = TRUE)</code></li>
+</ul></li>
+<li><code>is.na()</code></li>
+<li><code>na.omit()</code></li>
+<li><code>complete.cases()</code></li>
+</ul></li>
+<li>Challenge
+<ul>
+<li>Try this: <code>sample &lt;- c(2, 4, 4, &quot;NA&quot;, 6); mean(sample, na.rm = TRUE)</code></li>
+<li>What happens and why?</li>
+<li>Why does the error message say the argument is not numeric?</li>
+</ul></li>
+</ol>
+</div>
+<div id="starting-with-data" class="section level2">
+<h2>02 Starting with data</h2>
+<p><a href="https://jwhollister.com/R-ecology-lesson/02-starting-with-data.html" class="uri">https://jwhollister.com/R-ecology-lesson/02-starting-with-data.html</a></p>
+<ol start="0" style="list-style-type: decimal">
+<li>Learning objectives:
+<ul>
+<li>load external data (CSV files) in memory using the survey table (surveys.csv) as an example</li>
+<li>explore the structure and the content of a data frame in R</li>
+<li>understand what factors are and how to manipulate them</li>
+</ul></li>
+<li>Introduce the survey.csv dataset
+<ul>
+<li>it is data on species captured across many years and plots</li>
+</ul></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Column</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">record_id</td>
+<td align="left">Unique id for the observation</td>
+</tr>
+<tr class="even">
+<td align="left">month</td>
+<td align="left">month of observation</td>
+</tr>
+<tr class="odd">
+<td align="left">day</td>
+<td align="left">day of observation</td>
+</tr>
+<tr class="even">
+<td align="left">year</td>
+<td align="left">year of observation</td>
+</tr>
+<tr class="odd">
+<td align="left">plot_id</td>
+<td align="left">ID of a particular plot</td>
+</tr>
+<tr class="even">
+<td align="left">species_id</td>
+<td align="left">2-letter code</td>
+</tr>
+<tr class="odd">
+<td align="left">sex</td>
+<td align="left">sex of animal (“M”, “F”)</td>
+</tr>
+<tr class="even">
+<td align="left">hindfoot_length</td>
+<td align="left">length of the hindfoot in mm</td>
+</tr>
+<tr class="odd">
+<td align="left">weight</td>
+<td align="left">weight of the animal in grams</td>
+</tr>
+<tr class="even">
+<td align="left">genus</td>
+<td align="left">genus of animal</td>
+</tr>
+<tr class="odd">
+<td align="left">species</td>
+<td align="left">species of animal</td>
+</tr>
+<tr class="even">
+<td align="left">taxa</td>
+<td align="left">e.g. Rodent, Reptile, Bird, Rabbit</td>
+</tr>
+<tr class="odd">
+<td align="left">plot_type</td>
+<td align="left">type of plot</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" style="list-style-type: decimal">
+<li>Download the data, store in data folder, and read in
+<ul>
+<li><code>download.file(&quot;https://ndownloader.figshare.com/files/2292169&quot;, &quot;data/portal_data_joined.csv&quot;)</code></li>
+<li><code>surveys &lt;- read.csv('data/portal_data_joined.csv')</code></li>
+<li><code>head(surveys)</code>: describe the result</li>
+<li><code>str(surveys)</code>: do challenge</li>
+</ul></li>
+<li>Challenge:
+<ul>
+<li>If not already done, download data</li>
+<li>read into surveys</li>
+<li>get result of str(): green sticky when you get there</li>
+<li>Answer these:
+<ul>
+<li>What is the class of the object surveys?</li>
+<li>How many rows and how many columns are in this object?</li>
+<li>How many species have been recorded during these surveys?</li>
+</ul></li>
+<li>Point out factors. Useful structure, but unique and need to be discussed before we dig more into data frames.</li>
+</ul></li>
+<li>Factors
+<ul>
+<li>For categorical data</li>
+<li>stored as integers(i.e. levels) with labels</li>
+<li>pre-detemined number of levels
+<ul>
+<li>may have A, B, C levels but only A and C in your data</li>
+<li><code>sex &lt;- factor(c(&quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;))</code></li>
+<li><code>levels(sex)</code></li>
+<li><code>nlevels(sex)</code></li>
+</ul></li>
+<li>These don’t have order, but you might
+<ul>
+<li><code>food &lt;- factor(c(&quot;low&quot;, &quot;high&quot;, &quot;medium&quot;, &quot;high&quot;, &quot;low&quot;, &quot;medium&quot;, &quot;high&quot;))</code></li>
+<li><code>levels(food)</code></li>
+<li><code>food &lt;- factor(food, levels=c(&quot;low&quot;, &quot;medium&quot;, &quot;high&quot;))</code></li>
+<li><code>levels(food)</code></li>
+<li><code>min(food) ## doesn't work</code></li>
+</ul></li>
+<li>To add the ordering:
+<ul>
+<li><code>food &lt;- factor(food, levels=c(&quot;low&quot;, &quot;medium&quot;, &quot;high&quot;), ordered=TRUE)</code></li>
+<li><code>levels(food)</code></li>
+<li><code>min(food) ## works!</code></li>
+</ul></li>
+<li>Converting Factors
+<ul>
+<li><code>as.character()</code></li>
+<li><code>as.numeric()</code> be careful</li>
+<li>Examples
+<ul>
+<li><code>f &lt;- factor(c(1, 5, 10, 2))</code></li>
+<li><code>as.numeric(f) ## wrong! and there is no warning...</code></li>
+<li><code>as.numeric(as.character(f)) ## works...</code></li>
+<li><code>as.numeric(levels(f))[f]  ## The recommended way.</code>
+<ul>
+<li>Recomended becasue slightly more effecient than as.character, but not by much.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Challenge
+<ul>
+<li>In which order are the treatments listed?</li>
+<li>How can you recreate this plot with “control” listed last instead of first?</li>
+<li><code>exprmt &lt;- factor(c(&quot;treat1&quot;, &quot;treat2&quot;, &quot;treat1&quot;, &quot;treat3&quot;, &quot;treat1&quot;, &quot;control&quot;,&quot;treat1&quot;, &quot;treat2&quot;, &quot;treat3&quot;))</code></li>
+<li><code>table(exprmt)</code></li>
+<li><code>barplot(table(exprmt))</code></li>
+<li>Work on this on your own.</li>
+<li>~10 minutes to work on this.</li>
+</ul></li>
+</ol>
+</div>
+<div id="data-frames" class="section level2">
+<h2>03 Data Frames</h2>
+<p><a href="https://jwhollister.com/R-ecology-lesson/03-data-frames.html" class="uri">https://jwhollister.com/R-ecology-lesson/03-data-frames.html</a></p>
+<ol start="0" style="list-style-type: decimal">
+<li>Learning objectives
+<ul>
+<li>understand the concept of a data.frame</li>
+<li>use sequences</li>
+<li>know how to access any element of a data.frame</li>
+</ul></li>
+<li>What are data frames?
+<ul>
+<li>de facto standard for data in R</li>
+<li>tabular/rectangular data</li>
+<li>has rows and columns, spreadsheet like but with rules
+<ul>
+<li>collection of vectors as columns</li>
+</ul></li>
+<li>can see basics structure with <code>str()</code></li>
+<li>either built or imported
+<ul>
+<li><code>data.frame()</code></li>
+<li><code>read.csv()</code></li>
+<li><code>read.table()</code></li>
+<li>packages rio, readr, readxl …</li>
+<li>defualt on import is to convert strings to factors… ugh!</li>
+</ul></li>
+<li>import:
+<ul>
+<li><code>some_data &lt;- read.csv(&quot;data/some_file.csv&quot;, stringsAsFactors = FALSE)</code></li>
+</ul></li>
+<li>build:
+<ul>
+<li>Compare the output of these examples</li>
+<li>vs<code>character</code> and <code>factor</code>.</li>
+<li>factor:
+<ul>
+<li><code>example_data &lt;- data.frame(animal=c(&quot;dog&quot;, &quot;cat&quot;, &quot;sea cucumber&quot;, &quot;sea urchin&quot;),feel=c(&quot;furry&quot;, &quot;furry&quot;, &quot;squishy&quot;, &quot;spiny&quot;), weight=c(45, 8, 1.1, 0.8)); str(example_data)</code></li>
+</ul></li>
+<li>character:
+<ul>
+<li><code>example_data &lt;- data.frame(animal=c(&quot;dog&quot;, &quot;cat&quot;, &quot;sea cucumber&quot;, &quot;sea urchin&quot;),feel=c(&quot;furry&quot;, &quot;furry&quot;, &quot;squishy&quot;, &quot;spiny&quot;), weight=c(45, 8, 1.1, 0.8),stringsAsFactors = FALSE); str(example_data)</code></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Challenge
+<ul>
+<li>Let’s do these one at a time, then discuss. 5 minutes for each.</li>
+<li>Find the mistakes and experiment!!
+<ul>
+<li><code>author_book &lt;- data.frame(author_first=c(&quot;Charles&quot;, &quot;Ernst&quot;, &quot;Theodosius&quot;), author_last=c(Darwin, Mayr, Dobzhansky),year=c(1942, 1970))</code></li>
+</ul></li>
+<li>Predict class for each column, we will check together using <code>str()</code>
+<ul>
+<li>Did you guess right? Why? Why not?</li>
+<li>What would stringAsFactors = FALSE have done?</li>
+<li>What needs to change to get everything as you’d expect?</li>
+<li><code>country_climate &lt;- data.frame(country=c(&quot;Canada&quot;, &quot;Panama&quot;, &quot;South Africa&quot;, &quot;Australia&quot;),climate=c(&quot;cold&quot;, &quot;hot&quot;, &quot;temperate&quot;, &quot;hot/temperate&quot;), temperature=c(10, 30, 18, &quot;15&quot;), northern_hemisphere=c(TRUE, TRUE, FALSE, &quot;FALSE&quot;),has_kangaroo=c(FALSE, FALSE, FALSE, 1))</code></li>
+</ul></li>
+<li>We’ve talked about <code>data.frame()</code> and <code>read.csv()</code>, but you can also bind existing vectors together as columns with <code>cbind()</code> or as rows with <code>rbind()</code>. Try this and the check with <code>class()</code>.
+<ul>
+<li><code>colors &lt;- c(&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;yellow&quot;)</code></li>
+<li><code>counts &lt;- c(50, 60, 65, 82)</code></li>
+<li><code>new_dataframe &lt;- as.data.frame(cbind(colors, weights))</code></li>
+<li><code>class(new_dataframe)</code></li>
+</ul></li>
+<li>Gist of this is that type conversions is both a good and bad thing. Just make sure you check your data when it is read in to be sure it is as you expect.</li>
+</ul></li>
+<li>Inspecting <code>data.frame</code> objects
+<ul>
+<li>in addition to <code>head()</code> and <code>str()</code> we can check</li>
+<li>Size
+<ul>
+<li><code>dim()</code></li>
+<li><code>nrow()</code></li>
+<li><code>ncol()</code></li>
+</ul></li>
+<li>Content
+<ul>
+<li><code>head()</code></li>
+<li><code>tail()</code></li>
+</ul></li>
+<li>Names
+<ul>
+<li><code>names()</code></li>
+<li><code>rownames()</code></li>
 </ul></li>
 <li>Summary
 <ul>
-<li>RDBMS store data in tables with field (columns) and records (rows)</li>
-<li>Data has types and all values in a field (column) must be of same type</li>
-<li>Queries are what we use to interact (select, filter, summarize etc.)</li>
+<li><code>str()</code></li>
+<li><code>summary()</code></li>
 </ul></li>
 </ul></li>
-<li>Database Design
+<li>Indexing, Sequences, and Subsetting
 <ul>
-<li>Like I mentioned in the summary and what we heard when Ryan was talking about clean/tidy spreadsheets:
+<li>Sequences
 <ul>
-<li>One field per type of info</li>
+<li><code>:</code>, <code>2:8</code></li>
+<li><code>seq(1, 10, by=2)</code></li>
+<li><code>seq(5, 10, length.out=3)</code></li>
+<li><code>seq(50, by=5, length.out=10)</code></li>
+<li><code>seq(1, 8, by=3) # sequence stops to stay below upper limit</code></li>
 </ul></li>
-<li>Row-column combinations can not be further subset (i.e. it contains a single atomic value)</li>
-<li>This is database specific (not necessarily required or always recomended for a clean spreadsheet),
+<li>Indexing
 <ul>
-<li>no redundant info in tables</li>
-<li>need an identifer (a key) to relate across tables
+<li>vector
 <ul>
-<li>2 types: primary and foreign</li>
-<li>primary key is unique and each table must have its own primary key</li>
-<li>foreign key is used to relate to another tables primary key.</li>
-<li>show in sqlite dbase surveys relates to plot.</li>
+<li><code>a_vector &lt;- 20:10; a_vector[3]</code></li>
 </ul></li>
-</ul></li>
-</ul></li>
-<li>Import data into the database
+<li>data.frame
 <ul>
-<li>Let’s create our own database from the three csv files</li>
-<li>database: new database</li>
-<li>database: import</li>
-<li>select surveys and name appropriately</li>
-<li>Does first row have columns headings?</li>
-<li>Check the delimiter and quote options</li>
-<li>leave trailing delim unchecked</li>
-<li>OK</li>
-<li>Modify table, OK</li>
-<li>Set the data types
+<li><code>surveys[1]</code></li>
+<li><code>surveys[,1]</code></li>
+<li><code>surveys[1,1]</code></li>
+<li><code>surveys[1,6]</code></li>
+<li><code>surveys[1:3,7]</code></li>
+<li><code>surveys[3,]</code></li>
+<li><code>head_surveys &lt;- surveys[1:6,]</code></li>
+</ul></li>
+<li>by column name
 <ul>
-<li>text: species_id, genus, sex</li>
-<li>int: day, month, year, weight, …</li>
+<li><code>surveys[,&quot;species_id&quot;]</code></li>
+<li><code>surveys[[&quot;species_id&quot;]]</code></li>
+<li><code>surveys$species_id</code></li>
+<li><code>surveys$d</code> #word on partial matching, don’t do it`</li>
 </ul></li>
 </ul></li>
-</ol>
-<div id="challenge" class="section level2">
-<h2>Challenge</h2>
-<pre><code>- stickies down:
-- repeat the import for plots and species</code></pre>
-</div>
-</div>
-<div id="basic-queries" class="section level1">
-<h1>01 Basic Queries</h1>
-<p>Queries are how we interact with data. They return a view of the database but don’t (a SELECT query, that is) alter the underlying data.</p>
-<ol style="list-style-type: decimal">
-<li>First Query
+<li>Subsetting
 <ul>
-<li>Use the surveys table: data on individs captured included when, what plot, species, sex, and weight…</li>
-<li>We will be using SELECT queries</li>
-<li>Query to select year from surveys
-<ul>
-<li>Explain syntax and convention</li>
-</ul></li>
-<li>Query to select year, month, day from surveys</li>
-<li>Query to select all columns from surveys</li>
-<li>Unique Values:
-<ul>
-<li>select distinct species_id from surveys</li>
-<li>select distinct year, species_id from surveys</li>
-</ul></li>
-<li>Calculated Values:
-<ul>
-<li>select year, month, day, and weight/1000.0 (mention need for decimal)</li>
-<li>use ROUND(weight/1000.0,2)</li>
+<li>dm &lt;- surveys[surveys$species_id == “DM”, ]</li>
 </ul></li>
 </ul></li>
-</ol>
-<div id="challenge-1" class="section level2">
-<h2>Challenge</h2>
-<pre><code>- Write a query to return year, month, day, species_id, and weight in mg</code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li>Filtering
+<li>Challenge
 <ul>
-<li>May also want to return rows that match some critera</li>
-<li>Can use the WHERE clause for this.</li>
-<li>Select all from surveys where species_id = ‘DM’</li>
-<li>where year &gt;= 2000</li>
-<li>where both are true with AND (use parens around logicals for readability)</li>
-<li>where species_id = DM or DO or DS</li>
+<li>The function nrow() on a data.frame returns the number of rows. Use it, in conjuction with seq() to create a new data.frame called surveys_by_10 that includes every 10th row of the survey data frame starting at row 10 (10, 20, 30, …)</li>
+<li>Create a data.frame containing only the observations from 1999 of the surveys dataset.</li>
 </ul></li>
 </ol>
 </div>
-<div id="challenge-2" class="section level2">
-<h2>Challenge</h2>
-<pre><code>- return day, month, year, species_id, weight (in kg) for plot 1 and more than 75 grams.</code></pre>
-<ol start="3" style="list-style-type: decimal">
-<li>Complex Queries
+<div id="aggregating-and-analyzing-data-with-dplyr" class="section level2">
+<h2>04 Aggregating and analyzing data with dplyr</h2>
+<p><a href="https://jwhollister.com/R-ecology-lesson/04-dplyr.html" class="uri">https://jwhollister.com/R-ecology-lesson/04-dplyr.html</a></p>
+<ol start="0" style="list-style-type: decimal">
+<li>Learning Objective
 <ul>
-<li>Combine the above</li>
-<li>select all from surveys where year &gt;= 2000 and species_id IN (‘DM’,‘DO’,‘DS’));</li>
-<li>strategy on complex queries, start simple and add</li>
-<li>if large data, useful to work on smaller dataset to test query</li>
-<li>very complex and comments are useful</li>
-<li>SQL comment is ‘–’</li>
-<li>show example on website</li>
+<li>Learn basic utilities of the <code>dplyr</code> package</li>
+<li>Select and filter data</li>
+<li>Be able to use <code>magrittr</code> pipes</li>
+<li>Create new columns with <code>mutate()</code></li>
+<li>Use the split-apply-combine paradigm to summarize data</li>
+<li>Export data with <code>write.csv()</code></li>
 </ul></li>
-<li>Sorting
+<li>What is <code>dplyr</code>?</li>
+<li>Selecting and Filtering
 <ul>
-<li>We can use ORDER BY to sort</li>
-<li>SELECT * FROM species ORDER BY taxa ASC;</li>
-<li>SELECT * FROM species ORDER BY taxa DESC;</li>
-<li>SELECT * FROM species ORDER BY genus ASC, species ASC;</li>
+<li>Selecting columns
+<ul>
+<li><code>select(surveys, plot_id, species_id, weight)</code></li>
+</ul></li>
+<li>Filtering rows
+<ul>
+<li><code>filter(surveys, year == 1995)</code></li>
+<li>note: <code>==</code> if not already covered</li>
+</ul></li>
+</ul></li>
+<li>Pipes
+<ul>
+<li>What if we want to both select and filter?
+<ul>
+<li>intermediate, nested, or pipes</li>
+<li>Let little bunny foo-foo explain:
+<ul>
+<li><a href="http://r4ds.had.co.nz/pipes.html" class="uri">http://r4ds.had.co.nz/pipes.html</a></li>
+</ul></li>
+<li>from <code>magrittr</code>, a <code>dplyr</code> dependency</li>
+</ul></li>
+<li><code>output %&gt;% input #first arg by default</code></li>
+<li>Examples:
+<ul>
+<li><code>surveys %&gt;% filter(weight &lt; 5) %&gt;% select(species_id, sex, weight)</code></li>
+<li><code>surveys_sml &lt;- surveys %&gt;% filter(weight &lt; 5) %&gt;% select(species_id, sex, weight);surveys_sml</code></li>
+</ul></li>
+</ul></li>
+<li>Challenge
+<ul>
+<li>Using pipes, subset the data to include individuals collected before 1995, and retain the columns year, sex, and weight.</li>
+<li>Stickies when done</li>
+<li>I’ll show mine (or ask if anyone wants to show)</li>
+</ul></li>
+<li>Mutate
+<ul>
+<li>Create new columns</li>
+<li>examples (show line breaks in source):
+<ul>
+<li><code>surveys %&gt;% mutate(weight_kg = weight / 1000)</code></li>
+<li><code>surveys %&gt;% mutate(weight_kg = weight / 1000) %&gt;% head</code></li>
+<li><code>surveys %&gt;% filter(!is.na(weight)) %&gt;% mutate(weight_kg = weight / 1000) %&gt;% head</code>
+<ul>
+<li>describe <code>!is.na()</code></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Challenge
+<ul>
+<li>Create a new dataframe from the survey data that meets the following criteria: contains only the species_id column and a column that contains values that are half the hindfoot_length values (e.g. a new column hindfoot_half). In this hindfoot_half column, there are no NA values and all values are &lt; 30.</li>
+</ul></li>
+<li>Split-apply-combine and <code>summarize()</code>
+<ul>
+<li>Split into groups</li>
+<li>Apply analyis to each</li>
+<li>Combine results</li>
+<li>See <a href="https://www.jstatsoft.org/article/view/v040i01" class="uri">https://www.jstatsoft.org/article/view/v040i01</a></li>
+<li><code>group_by()</code> and <code>summarize()</code></li>
+<li>Examples:
+<ul>
+<li><code>surveys %&gt;% group_by(sex) %&gt;% summarize(mean_weight = mean(weight, na.rm = TRUE))</code></li>
+<li>two columns: <code>surveys %&gt;% group_by(sex, species_id) %&gt;% summarize(mean_weight = mean(weight, na.rm = TRUE))</code></li>
+<li>remove missing values up front: <code>surveys %&gt;% filter(!is.na(weight)) %&gt;% group_by(sex, species_id) %&gt;% summarize(mean_weight = mean(weight))</code></li>
+<li>explain <code>tbl_df</code></li>
+<li><code>surveys %&gt;% filter(!is.na(weight)) %&gt;% group_by(sex, species_id) %&gt;% summarize(mean_weight = mean(weight)) %&gt;% print(n=15)</code></li>
+<li>Summarize multiple values: <code>surveys %&gt;%filter(!is.na(weight)) %&gt;% group_by(sex, species_id) %&gt;% summarize(mean_weight = mean(weight), min_weight = min(weight))</code></li>
+</ul></li>
+<li>Tally
+<ul>
+<li>as part of summarize with: <code>surveys %&gt;% group_by(sex) %&gt;% summarize(mean_weight = mean(weight, na.rm = TRUE),samp = n())</code></li>
+<li>with <code>tally()</code>: <code>surveys %&gt;% group_by(sex) %&gt;% tally()</code></li>
+</ul></li>
+</ul></li>
+<li>Challenge
+<ul>
+<li>How many individuals were caught in each plot_type surveyed?</li>
+<li>Use group_by() and summarize() to find the mean, min, and max hindfoot length for each species (using species _id).</li>
+<li>What was the heaviest animal measured in each year? Return the columns year, genus, species_id, and weight.</li>
+</ul></li>
+<li>Exporting data
+<ul>
+<li>After a lot of data munging, useful to store to external file for sharing, archiving, etc.</li>
+<li>Do with <code>write.csv()</code></li>
+<li>Let’s prep our dataset for next lesson on plotting and write out to a new .csv</li>
 </ul></li>
 </ol>
-</div>
-<div id="challenge-3" class="section level2">
-<h2>Challenge</h2>
-<pre><code>- query that returns year, species_id, and weight(kg) from surveys with largest weights on top.</code></pre>
-<ol start="5" style="list-style-type: decimal">
-<li>Order of execution
-<ul>
-<li>SQL has a fairly specific order of operations and it isn’t determined by the order in which we type the query.</li>
-<li>But we can filter or order on things that aren’t necessarily selected, but this isn’t always determined by order of operations</li>
-<li>in short, if it fails, look at the order as that may be the cause!</li>
-<li>SELECT genus, species FROM species WHERE taxa = ‘Bird’ ORDER BY species_id ASC;</li>
-</ul></li>
-</ol>
-</div>
-<div id="challenge-4" class="section level2">
-<h2>Challenge</h2>
-<pre><code>- Let’s try to combine what we’ve learned so far in a single query. Using the surveys table write a query to display the three date fields, species_id, and weight in kilograms (rounded to two decimal places), for individuals captured in 1999, ordered alphabetically by the species_id. Write the query as a single line, then put each clause on its own line, and see how more legible the query becomes!</code></pre>
-</div>
-</div>
-<div id="aggregation" class="section level1">
-<h1>02 Aggregation</h1>
-<p>Aggregation allows us to combine results</p>
-<ol style="list-style-type: decimal">
-<li>COUNT and GROUP BY
-<ul>
-<li>We can use COUNT, with the start returns all rows</li>
-<li>SELECT COUNT(*) FROM surveys;</li>
-<li>SELECT COUNT(*), SUM(weight) FROM surveys;</li>
-<li>SELECT ROUND(SUM(weight)/1000.0, 3) FROM surveys;</li>
-<li>Mention MAX, MIN, AVG</li>
-</ul></li>
-</ol>
-<div id="challenge-5" class="section level2">
-<h2>Challenge</h2>
-<pre><code>- stickies down
-- Write a query that returns: total weight, average weight, and the min and max weights for all animals caught over the duration of the survey. Can you modify it so that it outputs these values only for weights between 5 and 10?
+<pre><code>surveys_complete &lt;- surveys %&gt;%
+  filter(species_id != &quot;&quot;,  # remove missing species_id
+  !is.na(weight),           # remove missing weight
+  !is.na(hindfoot_length),  # remove missing hindfoot_length
+  sex != &quot;&quot;)                # remove missing sex
 
-- Now lets do this same thing, but by species_id
-- SELECT COUNT(*) FROM surveys GROUP BY species_id;
-- GROUP BY can be used with multiple comma separate fields</code></pre>
+#Most common: 
+species_counts &lt;- surveys_complete %&gt;%
+                    group_by(species_id) %&gt;%
+                    tally %&gt;%
+                    filter(n &gt;= 50) %&gt;%
+                    select(species_id)
+#Now filter on these: 
+surveys_complete &lt;- surveys_complete %&gt;%
+                      filter(species_id %in% species_counts$species_id)
+dim(surveys_complete) #Should be 30463 by 13
+#Finally
+write.csv(surveys_complete, file=&quot;data_output/surveys_complete.csv&quot;, row.names=FALSE)</code></pre>
 </div>
-<div id="challenge-6" class="section level2">
-<h2>Challenge</h2>
-<pre><code>- stickies down
-- Write queries that return:
-    - How many individuals were counted in each year. a) in total; b) per each species.
-    - Average weight of each species in each year. 
-    - Can you modify the above queries combining them into one?
-    </code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li>HAVING keyword
+<div id="data-visualization-with-ggplot2" class="section level2">
+<h2>05 Data Visualization with ggplot2</h2>
+<p><a href="http://jwhollister.com/R-ecology-lesson/05-visualization-ggplot2.html" class="uri">http://jwhollister.com/R-ecology-lesson/05-visualization-ggplot2.html</a></p>
+<ol start="0" style="list-style-type: decimal">
+<li>Learning objectives
 <ul>
-<li>HAVING is like where but for aggregate results</li>
-<li>SELECT species_id, COUNT(species_id) FROM surveys GROUP BY species_id HAVING COUNT(species_id) &gt; 10;</li>
-<li>AS lets you add a column to view and use that later in the query</li>
-<li>SELECT species_id, COUNT(species_id) AS occurrences FROM surveys GROUP BY species_id HAVING occurrences &gt; 10;</li>
-<li>Notice order of operations. In this case HAVING must come after the group_by</li>
+<li>Visualize mammals data from surveys_complete.csv</li>
+<li>Understand how to plot data using <code>ggplot2</code></li>
+<li>Build step-by-step, complex plots</li>
 </ul></li>
-</ol>
-</div>
-<div id="challenge-7" class="section level2">
-<h2>Challenge</h2>
-<pre><code>- Write a query that returns, from the species table, the number of genus in each taxa, only for the taxa with more than 10 genus.</code></pre>
-<ol start="3" style="list-style-type: decimal">
-<li>Ordering aggregated results
+<li>Get and Load packages
 <ul>
-<li>We can also order aggregated results similar to how we use HAVING</li>
-<li>ORDER BY COUNT(species_id);</li>
+<li><code>install.packages(&quot;ggplot2&quot;)</code></li>
+<li><code>library(ggplot2)</code></li>
+<li><code>library(dplyr)</code></li>
 </ul></li>
-<li>Saving queries
+<li>What is <code>ggplot2</code>
 <ul>
-<li>Often we want to re-use a query, we can do this by saving it as a view:</li>
-<li>CREATE VIEW species_count AS SELECT species_id, COUNT(*) FROM surveys GROUP BY species_id;</li>
-<li>to re-use: SELECT * FROM species_count;</li>
-<li>to drop: DROP VIEW species_count;</li>
+<li>plotting package for all things static viz</li>
+<li>data.frame is basis for plots</li>
+<li>basic recipe:
+<ul>
+<li>create ggplot object</li>
+<li>add geom</li>
+<li>bind together with <code>+</code></li>
+<li>call object to plot</li>
 </ul></li>
-</ol>
-</div>
-<div id="challenge-8" class="section level2">
-<h2>Challenge</h2>
-<pre><code>- Write a query that returns the number of each species caught in each year sorted from most often caught species to the least occurring ones within each year starting from the most recent records. Save this query as a VIEW.</code></pre>
-</div>
-</div>
-<div id="joins-and-aliases" class="section level1">
-<h1>03 Joins and Aliases</h1>
-<ol style="list-style-type: decimal">
-<li>Joins
+<li>interactive example:
 <ul>
-<li>So far we have only worked with data from a single table</li>
-<li>often we want information from multiple table and this is where JOIN comes in</li>
-<li>We need to tell database how to link the two tables.</li>
-<li>use JOIN and ON</li>
-<li>SELECT * FROM surveys JOIN species ON surveys.species_id = species.species_id;
-<ul>
-<li>Use whiteboard to sketch this out</li>
+<li><code>#minimum required</code></li>
+<li><code>ggplot(data = surveys_complete)</code></li>
+<li><code>#now has x and y mapped via aes()</code></li>
+<li><code>ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length))</code></li>
+<li><code>#Add the geometry to plot</code></li>
+<li><code>ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point()</code></li>
 </ul></li>
-<li>notice the table.colname notation.</li>
-<li>output should be columns from first table plus columns for second table</li>
-<li>this results in the join column appearing twice, the shorthand USING doesn’t have this</li>
-<li>SELECT * FROM surveys JOIN species USING (species_id);</li>
-<li>Lastly, any column from the tables in the join can be used in the SQL statements we already know. But we need to use the tblname.colname notation.</li>
-<li>For instance in a SELECT.</li>
-<li>SELECT surveys.year, surveys.month, surveys.day, species.genus, species.species FROM surveys JOIN species ON surveys.species_id = species.species_id;</li>
-</ul></li>
-</ol>
-<div id="challenge-9" class="section level2">
-<h2>Challenge</h2>
-<pre><code>- Write a query that returns the genus, the species, and the weight of every individual captured at the site
-
-- Using other SQL statements 
-- SELECT plots.plot_type, AVG(surveys.weight) FROM surveys JOIN plots USING(plot_id) GROUP BY plots.plot_type;</code></pre>
-</div>
-<div id="challenge-10" class="section level2">
-<h2>Challenge</h2>
-<pre><code>- Write a query that returns the number of genus of the animals caught in each plot in descending order.
-- Write a query that finds the average weight of each rodent species (i.e., only include species with Rodent in the taxa field).</code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li>Functions
+<li>Interactive is fine, but saving to object is a bit better
 <ul>
-<li>There are numerous functions that are part of SQL for manipulating data.<br />
-</li>
-<li>We’ve seen SUM COUNT etc</li>
-<li>I don’t like the challenges here, so we will skip, but since we’ve already used some functions no big loss.<br />
-</li>
-<li>Show list of functions from the SQL lessons.</li>
+<li><code>surveys_plot &lt;- ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point(); surveys_plot</code></li>
 </ul></li>
-<li>Aliases
+<li>think of stuff in <code>ggplot()</code> as universal (available to all geoms) and stuff added to geom as only for that geom.</li>
+</ul></li>
+<li>Build plots iteratively
 <ul>
-<li>These are useful becuase we can create shortened names that help clean up the SQL query</li>
-<li>We can alias table names</li>
-<li>SELECT surv.year, surv.month, surv.day, sp.genus, sp.species FROM surveys AS surv JOIN species AS sp ON surv.species_id = sp.species_id;</li>
-<li>And column names</li>
-<li>SELECT surv.year AS yr, surv.month AS mo, surv.day AS day, sp.genus AS gen, sp.species AS sp FROM surveys AS surv JOIN species AS sp ON surv.species_id = sp.species_id;</li>
+<li>no overplot: <code>surveys_plot &lt;- ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point(alpha = 0.1); surveys_plot</code></li>
+<li>add color: <code>surveys_plot &lt;- ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point(alpha = 0.1, color = &quot;blue&quot;); surveys_plot</code></li>
+<li>add color per species: <code>surveys_plot &lt;- ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point(alpha = 0.1, color = species_id); surveys_plot</code></li>
+</ul></li>
+<li>Boxplot
+<ul>
+<li>Boxplot is looking for a categorical (think factor) on the x and continuous on the y.</li>
+<li><code>ggplot(data = surveys_complete, aes(x = species_id, y = hindfoot_length)) + geom_boxplot()</code></li>
+<li>add jitter to better see distribution of the points</li>
+<li><code>ggplot(data = surveys_complete, aes(x = species_id, y = hindfoot_length)) + geom_boxplot() + geom_jitter(alpha = 0.1, color = &quot;tomato&quot;)</code></li>
+</ul></li>
+<li>Challenge
+<ul>
+<li>How could we get the boxplot plotted on top of the jittered points?</li>
+<li>Boxplots are useful summaries, but hide the shape of the distribution. For example, if there is a bimodal distribution, this would not be observed with a boxplot. An alternative to the boxplot is the violin plot (sometimes known as a beanplot), where the shape (of the density of points) is drawn.
+<ul>
+<li>Replace the box plot with a violin plot; see geom_violin()</li>
+</ul></li>
+<li>In many types of data, it is important to consider the scale of the observations. For example, it may be worth changing the scale of the axis to better distribute the observations in the space of the plot. Changing the scale of the axes is done similarly to adding/modifying other components (i.e., by incrementally adding commands).</li>
+<li>Represent weight on the log10 scale; see scale_y_log10()</li>
+<li>Create boxplot for hindfoot_length.</li>
+</ul></li>
+<li>Time Series
+<ul>
+<li>Plot year vs total count</li>
+<li>First we need to massage data:
+<ul>
+<li><code>yearly_counts &lt;- surveys_complete %&gt;% group_by(year, species_id) %&gt;% tally</code></li>
+</ul></li>
+<li>Then Plot
+<ul>
+<li><code>time_series &lt;- ggplot(data = yearly_counts, aes(x = year, y = n)) + geom_line()</code></li>
+</ul></li>
+<li>Not quite… That is all species together</li>
+<li>By species:
+<ul>
+<li><code>time_series &lt;-ggplot(data = yearly_counts, aes(x = year, y = n, group = species_id)) + geom_line()</code></li>
+</ul></li>
+<li>Need to tell species apart:
+<ul>
+<li><code>time_series &lt;-ggplot(data = yearly_counts, aes(x = year, y = n, group = species_id, color = species_id)) + geom_line()</code></li>
+</ul></li>
+</ul></li>
+<li>Faceting
+<ul>
+<li>Last time series plot OK, but still hard to read. Facets allow for separate plots per group</li>
+<li><code>ggplot(data = yearly_counts, aes(x = year, y = n, group = species_id, colour = species_id)) + geom_line() + facet_wrap(~ species_id)</code></li>
+<li>Split by sex, needs more data manipulation (skip if no time)</li>
+<li><code>yearly_sex_counts &lt;- surveys_complete %&gt;%group_by(year, species_id, sex) %&gt;%tally</code></li>
+<li><code>time_series_sp_sex &lt;- ggplot(data = yearly_sex_counts, aes(x = year, y = n, color = species_id, group = sex)) + geom_line() + facet_wrap(~ species_id)</code></li>
+<li>Lastly, lets clean up extraneous legend, and change up our background</li>
+<li><code>time_series_sp_sex &lt;- ggplot(data = yearly_sex_counts, aes(x = year, y = n, color = sex, group = sex)) + geom_line() + facet_wrap(~ species_id) + theme_bw()</code></li>
+</ul></li>
+<li>Challenge
+<ul>
+<li><code>Use what you just learned to create a plot that depicts how the average weight of each species changes through the years.</code></li>
+</ul></li>
+<li>Facet Grid (skip if no time)
+<ul>
+<li>Similar to facet_wrap, but let you specify row and columns for layout instead of fitting on a sinlge page</li>
+<li>Data manipulation: <code>yearly_sex_weight &lt;- surveys_complete %&gt;% group_by(year, sex, species_id) %&gt;% summarize(avg_weight = mean(weight))</code></li>
+<li>Plot 1 col x 2 rows: <code>ggplot(data = yearly_sex_weight, aes(x=year, y=avg_weight, color = species_id, group = species_id)) + geom_line() + facet_grid(sex ~ .)</code></li>
+<li>Plot 2 col x 1 row: <code>ggplot(data = yearly_sex_weight, aes(x=year, y=avg_weight, color = species_id, group = species_id)) + geom_line() + facet_grid(. ~ sex)</code></li>
+</ul></li>
+<li>Customization
+<ul>
+<li>Infinite ways to customize plots</li>
+<li>Cheat sheet is helpful: <a href="https://www.rstudio.com/wp-content/uploads/2015/08/ggplot2-cheatsheet.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2015/08/ggplot2-cheatsheet.pdf</a></li>
+<li>Labels with <code>labs()</code>
+<ul>
+<li><code>time_series_sp_sex &lt;- time_series_sp_sex + labs(title = 'Observed species in time', x = 'Year of observation',y = 'Number of species')</code></li>
+</ul></li>
+<li>Up the font:
+<ul>
+<li><code>time_series_sp_sex &lt;- time_series_sp_sex + theme(text=element_text(size=16, family=&quot;Arial&quot;))</code></li>
+</ul></li>
+<li>change x-axis direction:
+<ul>
+<li><code>time_series_sp_sex &lt;- time_series_sp_sex + theme(axis.text.x = element_text(colour=&quot;grey20&quot;, size=12, angle=90, hjust=.5, vjust=.5), axis.text.y = element_text(colour=&quot;grey20&quot;, size=12),text=element_text(size=16, family=&quot;Arial&quot;))</code></li>
+</ul></li>
+<li>save and use a new theme:
+<ul>
+<li><code>arial_grey_theme &lt;- theme(axis.text.x = element_text(colour=&quot;grey20&quot;, size=12, angle=90, hjust=.5, vjust=.5),axis.text.y = element_text(colour=&quot;grey20&quot;, size=12), text=element_text(size=16, family=&quot;Arial&quot;))</code></li>
+<li><code>ggplot(surveys_complete, aes(x = species_id, y = hindfoot_length)) + geom_boxplot() + arial_grey_theme</code></li>
+</ul></li>
+</ul></li>
+<li>Challenge
+<ul>
+<li>Try to customize a plot on your own. Use the RStudio CheatSheet for help.</li>
+</ul></li>
+<li>Save the plot
+<ul>
+<li><code>ggsave()</code></li>
 </ul></li>
 </ol>
 </div>

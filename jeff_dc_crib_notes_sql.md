@@ -226,6 +226,7 @@ Aggregation allows us to combine results
     - We need to tell database how to link the two tables.
     - use JOIN and ON
     - SELECT * FROM surveys JOIN species ON surveys.species_id = species.species_id;
+        - Use whiteboard to sketch this out
     - notice the table.colname notation.
     - output should be columns from first table plus columns for second table
     - this results in the join column appearing twice, the shorthand USING doesn't have this
@@ -245,6 +246,16 @@ Aggregation allows us to combine results
     - Write a query that finds the average weight of each rodent species (i.e., only include species with Rodent in the taxa field).
     
 2. Functions
+    - There are numerous functions that are part of SQL for manipulating data.  
+    - We've seen SUM COUNT etc
+    - I don't like the challenges here, so we will skip, but since we've already used some functions no big loss.  
+    - Show list of functions from the SQL lessons.
+    
 3. Aliases
+    - These are useful becuase we can create shortened names that help clean up the SQL query
+    - We can alias table names
+    - SELECT surv.year, surv.month, surv.day, sp.genus, sp.species FROM surveys AS surv JOIN species AS sp ON surv.species_id = sp.species_id;
+    - And column names
+    - SELECT surv.year AS yr, surv.month AS mo, surv.day AS day, sp.genus AS gen, sp.species AS sp FROM surveys AS surv JOIN species AS sp ON surv.species_id = sp.species_id;
 
 

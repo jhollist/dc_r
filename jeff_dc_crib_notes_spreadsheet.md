@@ -4,7 +4,7 @@ output:
     css: style.css
 ---
 # 00 Before
-http://jwhollister.com/spreadsheet-ecology-lesson/
+<http://www.datacarpentry.org/spreadsheet-ecology-lesson/>
 
 1. Intro myself and helpers
 2. Plea for flexibility 
@@ -14,7 +14,7 @@ http://jwhollister.com/spreadsheet-ecology-lesson/
 5. Check on spreadsheet installs
 
 # 00 Spreadsheet Intro
-http://jwhollister.com/spreadsheet-ecology-lesson/00-intro.html
+<http://www.datacarpentry.org/spreadsheet-ecology-lesson/00-intro.html>
 
 1. Our goals are:
     - Good data entry practices - formatting data tables in spreadsheets
@@ -38,7 +38,7 @@ http://jwhollister.com/spreadsheet-ecology-lesson/00-intro.html
     - Learn about some best pracices to our use of spreadsheets that will help out in the long run
 
 # 01 Formatting Data Tables
-http://jwhollister.com/spreadsheet-ecology-lesson/01-format-data.html
+<http://www.datacarpentry.org/spreadsheet-ecology-lesson/01-format-data.html>
 
 1. Learn some best practices for structuring a dataset and for things to do when cleaning up a dataset.
 2. Think about a spreadsheet like a computer would not like a human.
@@ -56,10 +56,10 @@ http://jwhollister.com/spreadsheet-ecology-lesson/01-format-data.html
 5. Exercise
 
 # 02 Quick rewview of some of the problems
-http://jwhollister.com/spreadsheet-ecology-lesson/02-common-mistakes.html
+<http://www.datacarpentry.org/spreadsheet-ecology-lesson/02-common-mistakes.html>
 
 # 03 Dates as data
-http://jwhollister.com/spreadsheet-ecology-lesson/03-dates-as-data.html
+<http://www.datacarpentry.org/spreadsheet-ecology-lesson/03-dates-as-data.html>
 
 1. Goal is to recognize the problem with dates in spreadsheets
 2. In short, dates may look nice in a spreadsheet, but unles you know exactly what is happening behind the scense, the data can very easily get corrupted.
@@ -72,7 +72,7 @@ http://jwhollister.com/spreadsheet-ecology-lesson/03-dates-as-data.html
     - Year, Day of Year columns
 
 # 04 Quality Assurance/Quality control
-http://jwhollister.com/spreadsheet-ecology-lesson/04-quality-control.html
+<http://www.datacarpentry.org/spreadsheet-ecology-lesson/04-quality-control.html>
 
 1. Quality Assurance is for making sure data is entered according to a set of accepted values (e.g. pH between 0 and 14)
 2. Quality Controol is checking existing data for problems (e.g that pH value of 72 is probably not that!)
@@ -82,12 +82,13 @@ http://jwhollister.com/spreadsheet-ecology-lesson/04-quality-control.html
     - Conditional Formating
     
 # 05 Exporting Data
-http://jwhollister.com/spreadsheet-ecology-lesson/05-exporting-data.html
+<http://www.datacarpentry.org/spreadsheet-ecology-lesson/05-exporting-data.html>
 
 1. Want to export data into non-proprietary formats.  
 2. Allows for use in other software and not tied to a piece of software that might not exist in the future, and not always acceptable for data deposition.
 3. Export to .csv (not perfect, but pretty good)
+
 #06 Data Format Caveats
-http://jwhollister.com/spreadsheet-ecology-lesson/06-data-formats-caveats.html
+<http://www.datacarpentry.org/spreadsheet-ecology-lesson/06-data-formats-caveats.html>
 
 1. commas in values for .csv (need "")

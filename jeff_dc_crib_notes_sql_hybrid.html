@@ -415,14 +415,108 @@ surveys %&gt;%
 <pre><code>explain(surveys %&gt;%
           select(year, species_id, plot_id))</code></pre>
 </div>
+<div id="challenge-5" class="section level2">
+<h2>Challenge</h2>
+<ul>
+<li>This challenge is not on the site. I modified it from the SQL Lessons to show that we can do the exact same thing with dplyr that we can with SQL.</li>
+<li>Convert the following SQL to a dplyr workflow
+<ul>
+<li>SELECT species_id, year, weight FROM surveys ORDER BY year</li>
+<li>For those who finish quickly: SELECT species_id, year, weight FROM surveys WHERE year &gt;= 2000 AND species_id = ‘DM’ ORDER BY year, weight DESC</li>
+</ul></li>
+</ul>
+</div>
 <div id="laziness" class="section level2">
 <h2>Laziness</h2>
+<ul>
+<li>This is the main reason I like dplyr. It prefers to only do work when absolutely necessary!</li>
+<li>By default:
+<ul>
+<li>all of the functions are converted to SQL,</li>
+<li>sent to the datbase for it to figure out what to do</li>
+<li>Only the first 10 results are sent back (hence the ???)</li>
+</ul></li>
+<li>This is good as it allows us to work with large datasets without worrying too much about available memory</li>
+<li>Can force R to return everything with <code>collect()</code></li>
+</ul>
+<pre><code>lazy &lt;- surveys %&gt;%
+  select(species_id, sex, weight)
+
+clct &lt;- surveys %&gt;%
+  select(species_id, sex, weight) %&gt;%
+  collect()
+
+format(object.size(lazy), &quot;Kb&quot;)
+format(object.size(clct), &quot;Kb&quot;)</code></pre>
 </div>
 <div id="complex-queries-and-joins" class="section level2">
 <h2>Complex Queries and Joins</h2>
+<ul>
+<li>note: only try this if plenty of time left (i.e. don’t start if after 3pm-ish)</li>
+<li>So far have only worked with a single table,</li>
+<li>but realtional databases are called that becuase of the relations between multiple tables</li>
+<li>If we have field in both, however; we can join the tables together</li>
+<li>There are many types of joins, but for today we will look at
+<ul>
+<li>Inner - common to both</li>
+<li>Left (and right) - all for left (or right) and common</li>
+<li>Full - all of both</li>
+</ul></li>
+</ul>
+<pre><code>tbl1 &lt;- data.frame(id = c(1,2,3,4), number = c(37,28,590,0.01))
+tbl2 &lt;- data.frame(id = c(3,4,5,6), letters = c(&quot;a&quot;,&quot;x&quot;,&quot;n&quot;,&quot;j&quot;))
+ij &lt;- inner_join(tbl1,tbl2, by = id)
+lj &lt;- left_join(tbl1,tbl2, by = id)
+rj &lt;- right_join(tbl1, tbl2, by = id) # == left_join(tbl2, tbl1)
+fj &lt;- full_join(tbl1, tbl2, by = id)</code></pre>
+<ul>
+<li>Now we can combine data from across multiple tables and query that information</li>
+<li>There are a gazillion ways to set this up (hyperbole)</li>
+<li>but my preference is to lead with the joins.</li>
+<li>let’s get the plot 1 information common to both surveys and plots</li>
+</ul>
+<pre><code># Read in plots
+plots &lt;- tbl(mammals, &quot;plots&quot;)
+plot_and_survey &lt;- inner_join(plots, surveys) %&gt;%
+  filter(plot_id == 1) %&gt;%
+  collect()
+plot_and_survey</code></pre>
+</div>
+<div id="challenge-6" class="section level2">
+<h2>Challenge</h2>
+<ul>
+<li>Using dplyr, query the database to return the number of rodents observed in each plot in each year. this will require the species and survey tables. And since it is late on the second day, some help…</li>
+</ul>
+<pre><code>species &lt;- tbl(fill_in, &quot;the blank&quot;)
+sp_counts &lt;- inner_join(a_table, another_table) %&gt;%
+                filter(a_column == &quot;a value&quot;) %&gt;%
+                group_by(one_thing, and_another) %&gt;%
+                summarize(num_rodents = function_that_counts())
+  </code></pre>
 </div>
 <div id="create-a-new-sqlite-database." class="section level2">
 <h2>Create a new SQLite database.</h2>
+<ul>
+<li>All of what we have done so far has worked with an existing sqlite database</li>
+<li>What if we have data frames in R</li>
+<li>Create a new DB from those.</li>
+<li>Let’s pretend we don’t have an existing sqlite db for the portal data</li>
+<li>download csv’s</li>
+<li>read in with read.csv</li>
+<li>first create an empty db to hold the data</li>
+</ul>
+<pre><code>new_portal_db &lt;- src_sqlite(&quot;portal_database_jwh.sqlite&quot;, create = TRUE)
+new_portal_db</code></pre>
+<ul>
+<li>Now we can add our tables to it!</li>
+</ul>
+<pre><code>copy_to(new_portal_db, surveys, temporary = FALSE)
+copy_to(new_portal_db, species, temporary = FALSE)
+new_portal_db</code></pre>
+</div>
+<div id="challenge-7" class="section level2">
+<h2>Challenge</h2>
+<p>Add the remaining table to the database</p>
 </div>
 </div>
 

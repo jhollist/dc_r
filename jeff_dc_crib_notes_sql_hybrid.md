@@ -237,10 +237,112 @@ explain(surveys %>%
           select(year, species_id, plot_id))
 ```
 
+## Challenge
+
+  - This challenge is not on the site.  I modified it from the SQL Lessons to show that we can do the exact same thing with dplyr that we can with SQL.
+  - Convert the following SQL to a dplyr workflow
+    - SELECT species_id, year, weight 
+      FROM surveys
+      ORDER BY year
+    - For those who finish quickly:
+      SELECT species_id, year, weight
+      FROM surveys 
+      WHERE year >= 2000 
+      AND species_id = 'DM'
+      ORDER BY year, weight DESC
+
 ## Laziness
 
+  - This is the main reason I like dplyr.  It prefers to only do work when absolutely necessary!
+  - By default:
+    - all of the functions are converted to SQL, 
+    - sent to the datbase for it to figure out what to do
+    - Only the first 10 results are sent back (hence the ???)
+  - This is good as it allows us to work with large datasets without worrying too much about available memory
+  - Can force R to return everything with `collect()`
+  
+```
+lazy <- surveys %>%
+  select(species_id, sex, weight)
 
+clct <- surveys %>%
+  select(species_id, sex, weight) %>%
+  collect()
+
+format(object.size(lazy), "Kb")
+format(object.size(clct), "Kb")
+```
 
 ## Complex Queries and Joins
 
+  - note: only try this if plenty of time left (i.e. don't start if after 3pm-ish)
+  - So far have only worked with a single table, 
+  - but realtional databases are called that becuase of the relations between multiple tables
+  - If we have field in both, however; we can join the tables together
+  - There are many types of joins, but for today we will look at
+    - Inner - common to both
+    - Left (and right) - all for left (or right) and common
+    - Full - all of both
+
+```
+tbl1 <- data.frame(id = c(1,2,3,4), number = c(37,28,590,0.01))
+tbl2 <- data.frame(id = c(3,4,5,6), letters = c("a","x","n","j"))
+ij <- inner_join(tbl1,tbl2, by = id)
+lj <- left_join(tbl1,tbl2, by = id)
+rj <- right_join(tbl1, tbl2, by = id) # == left_join(tbl2, tbl1)
+fj <- full_join(tbl1, tbl2, by = id)
+```
+
+  - Now we can combine data from across multiple tables and query that information
+  - There are a gazillion ways to set this up (hyperbole)
+  - but my preference is to lead with the joins.
+  - let's get the plot 1 information common to both surveys and plots
+
+```
+# Read in plots
+plots <- tbl(mammals, "plots")
+plot_and_survey <- inner_join(plots, surveys) %>%
+  filter(plot_id == 1) %>%
+  collect()
+plot_and_survey
+```
+## Challenge
+
+  - Using dplyr, query the database to return the number of rodents observed in each plot in each year.  this will require the species and survey tables.  And since it is late on the second day, some help...
+
+```
+species <- tbl(fill_in, "the blank")
+sp_counts <- inner_join(a_table, another_table) %>%
+                filter(a_column == "a value") %>%
+                group_by(one_thing, and_another) %>%
+                summarize(num_rodents = function_that_counts())
+  
+```
+
 ## Create a new SQLite database.
+
+  - All of what we have done so far has worked with an existing sqlite database
+  - What if we have data frames in R 
+  - Create a new DB from those.
+  - Let's pretend we don't have an existing sqlite db for the portal data
+  - download csv's 
+  - read in with read.csv
+  - first create an empty db to hold the data
+  
+```
+new_portal_db <- src_sqlite("portal_database_jwh.sqlite", create = TRUE)
+new_portal_db
+```
+  - Now we can add our tables to it!
+  
+```
+copy_to(new_portal_db, surveys, temporary = FALSE)
+copy_to(new_portal_db, species, temporary = FALSE)
+new_portal_db
+```
+
+## Challenge
+
+Add the remaining table to the database
+
+

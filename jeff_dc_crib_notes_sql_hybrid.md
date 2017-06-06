@@ -58,6 +58,10 @@ output:
         - Widely used
         - No admin overhead
         - Has limits, but usually not a concern for research data
+        - size limit: 140 TB!!  For comparison, MS Access is 2 GB for a single DB
+        - In practice 100s of GB probably just fine
+        - Best if local (so I am told).  
+        - If network and multiple users, think about postrgres or the like.
 
 7. Relational Databases 
     - Let's look at portal_mammals.sqlite
@@ -79,7 +83,7 @@ output:
         - Queries are what we use to interact (select, filter, summarize etc.)
 
 8. Database Design
-    - Like I mentioned in the summary and what we heard when Ryan was talking about
+    - Like I mentioned in the summary and what we heard when I was talking about
       clean/tidy spreadsheets:
         - One field per type of info
     - Row-column combinations can not be further subset (i.e. it contains a single 
@@ -109,8 +113,8 @@ output:
         - int: day, month, year, weight, ...
 
 ## Challenge
-    - stickies down:
-    - repeat the import for plots and species
+  - stickies down:
+  - repeat the import for plots and species
 
 # 01 Basic Queries
 
@@ -169,20 +173,73 @@ Queries are how we interact with data.  They return a view of the database but d
     - SELECT genus, species FROM species WHERE taxa = 'Bird' ORDER BY species_id ASC;
     
 ## Challenge
-    - Let’s try to combine what we’ve learned so far in a single query. Using the surveys table write a query to display the three date fields, species_id, and weight in kilograms (rounded to two decimal places), for individuals captured in 1999, ordered alphabetically by the species_id. Write the query as a single line, then put each clause on its own line, and see how more legible the query becomes!
+  - Let’s try to combine what we’ve learned so far in a single query. Using the surveys table write a query to display the three date fields, species_id, and weight in kilograms (rounded to two decimal places), for individuals captured in 1999, ordered alphabetically by the species_id. Write the query as a single line, then put each clause on its own line, and see how more legible the query becomes!
     
-# Changing gears - Databases and SQL in R
+# Changing gears: Databases and SQL in R
+
 <http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html>
 
-## Connecting to databases with R
+  - We are trying something new here by shifting to R now.  This is useful, I think, becuase in practice much of your interaction with a database won't necessarily be via direct SQL queries.  
+  - This is also useful becuase it allows you to keep your database queries in a single language (R with `dplyr`) and workflow.
 
+## Connecting to databases with R
+  - we should have the data already, but if not grab the portal_mammals.sqlite database from figshare via <https://ndownloader.figshare.com/files/2292171>
+  - with `dplyr` (and really with `DBI`) we can connect to many different databases.  Most of these require some set up, but sqlite doesn't really.
+
+  - with this downloaded we can connect to the database with dplyr
+  - May need to install RSQLite package.
+```
+library(dplyr)
+mammals <- src_sqlite("data/portal_mammals.sqlite")
+```
+  - this does not (and this is the cool part) actually load the data into R, it just makes a connection.  This allows us to work with DBs that are MUCH larger than our available memory
+  -  let's see what dplyr thinks of this object
+  
+```
+mammals
+```
+
+  - key point here are the three tables in the database.
+  
 ## Query with SQL
 
+  - We can query these tables directly with a SQL statement, but first we need to access the tables in the database with the tbl command.
+  
+```
+tbl(mammals, sql("SELECT year, species_id, plot_id FROM surveys"))
+```
+  -  So, just like we did with the firefox SQL Manager, we can run arbitrary SQL statements, on a database, but directly in R!
+  
 ## Query with dplyr (why dplyr is so damn cool)
 
+  - I'll admit to being a very mediocre SQL statement writer...  I do however dream in (and so do you all now) dplyr piped workflows.  
+  - We can do the same thing that we just did, but with dplyr.
+  
+```
+# Get out a data.frame/tibble
+surveys <- tbl(mammals,"surveys")
+
+# Then select
+surveys %>%
+  select(year, species_id, plot_id)
+```
+
+  - Also, `tbl()` returns a tibble which behaves a lot like a data frame 
+  
 ## SQL translation
 
+  - So what is actually happening here.  
+  - `dplyr` doing the work and converts our functions to SQL.
+  - explain will show this.
+  
+```
+explain(surveys %>%
+          select(year, species_id, plot_id))
+```
+
 ## Laziness
+
+
 
 ## Complex Queries and Joins
 

@@ -13,6 +13,14 @@ output:
 5. Get/Talk about data <http://www.datacarpentry.org/spreadsheet-ecology-lesson/setup/>
 6. Create a folder for the workshop (eg: data_carpentry_uri).  Add a "data" folder, and save data there.
 6. Check on spreadsheet installs
+7. Quick overview of how things will work
+    - Mostly live code/software examples and demos 
+    - bounce back and forth from on line materials to examples.
+    - You can follow along with those
+    - Red Stickies if problems, Green if everything OK
+    - Instrcutor will stop for questions but helpers are preferred (via stickies) for "this isn't working" kind.  If more general questions and things that all would benefit from instructor happy to take those or (better yet)  Put them in the etherpad and helpers will answer there.  Show etherpad now!
+    - Lots of exercises
+    - If more general question, or don't want to 
 
 # 00 Spreadsheet Intro
 <http://www.datacarpentry.org/spreadsheet-ecology-lesson/00-intro.html>
